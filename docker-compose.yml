@@ -1,0 +1,59 @@
+version: '3.8'
+
+services:
+  # PHP/Apache Web Server
+  web:
+    build: .
+    container_name: cinemaster_web
+    ports:
+      - "8888:80"
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      - db
+    environment:
+      - APACHE_DOCUMENT_ROOT=/var/www/html
+    networks:
+      - cinemaster_network
+
+  # MySQL Database
+  db:
+    image: mysql:8.0
+    platform: linux/arm64
+    container_name: cinemaster_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: cinemaster
+      MYSQL_USER: cinemaster_user
+      MYSQL_PASSWORD: cinemaster_pass
+    ports:
+      - "3307:3306"
+    volumes:
+      - cinemaster_db_data:/var/lib/mysql
+      - ./database/cinemaster.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - cinemaster_network
+
+  # phpMyAdmin (Optional - for database management)
+  phpmyadmin:
+    image: arm64v8/phpmyadmin
+    container_name: cinemaster_phpmyadmin
+    restart: always
+    ports:
+      - "8889:80"
+    environment:
+      PMA_HOST: db
+      PMA_USER: root
+      PMA_PASSWORD: root
+    depends_on:
+      - db
+    networks:
+      - cinemaster_network
+
+networks:
+  cinemaster_network:
+    driver: bridge
+
+volumes:
+  cinemaster_db_data:

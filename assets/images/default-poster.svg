@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="600" viewBox="0 0 400 600">
+  <rect width="100%" height="100%" fill="#1e1e1e"/>
+  <rect x="50" y="200" width="300" height="200" rx="10" fill="#2d2d2d"/>
+  <circle cx="200" cy="280" r="50" fill="#dc3545" opacity="0.8"/>
+  <polygon points="185,260 185,300 220,280" fill="white"/>
+  <text x="200" y="450" text-anchor="middle" fill="#6c757d" font-family="Arial, sans-serif" font-size="18">No Image Available</text>
+  <text x="200" y="480" text-anchor="middle" fill="#dc3545" font-family="Arial, sans-serif" font-size="14" font-weight="bold">CineMaster</text>
+</svg>
