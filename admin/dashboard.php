@@ -61,10 +61,10 @@ include INCLUDES_PATH . 'header.php';
                     <h2 class="fw-bold mb-1">
                         <i class="bi bi-speedometer2 text-danger me-2"></i>Dashboard
                     </h2>
-                    <p class="text-muted mb-0">Welcome back, <?php echo htmlspecialchars($_SESSION['user_name']); ?>!</p>
+                    <p class="text-light mb-0">Welcome back, <?php echo htmlspecialchars($_SESSION['user_name']); ?>!</p>
                 </div>
                 <div>
-                    <span class="text-muted">
+                    <span class="text-light">
                         <i class="bi bi-calendar me-1"></i>
                         <?php echo date('l, F j, Y'); ?>
                     </span>
@@ -75,7 +75,7 @@ include INCLUDES_PATH . 'header.php';
             <div class="row g-4 mb-4">
                 <div class="col-xl-3 col-md-6">
                     <div class="card bg-primary text-white h-100">
-                        <div class="card-body">
+                        <div class="card-body text-light">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
                                     <h6 class="text-white-50">Total Users</h6>
@@ -94,7 +94,7 @@ include INCLUDES_PATH . 'header.php';
                 
                 <div class="col-xl-3 col-md-6">
                     <div class="card bg-success text-white h-100">
-                        <div class="card-body">
+                        <div class="card-body text-light">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
                                     <h6 class="text-white-50">Total Revenue</h6>
@@ -111,7 +111,7 @@ include INCLUDES_PATH . 'header.php';
                 
                 <div class="col-xl-3 col-md-6">
                     <div class="card bg-warning text-dark h-100">
-                        <div class="card-body">
+                        <div class="card-body text-light">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
                                     <h6 class="text-dark opacity-75">Total Bookings</h6>
@@ -130,7 +130,7 @@ include INCLUDES_PATH . 'header.php';
                 
                 <div class="col-xl-3 col-md-6">
                     <div class="card bg-danger text-white h-100">
-                        <div class="card-body">
+                        <div class="card-body text-light">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
                                     <h6 class="text-white-50">Total Movies</h6>
@@ -160,7 +160,7 @@ include INCLUDES_PATH . 'header.php';
                                 View All
                             </a>
                         </div>
-                        <div class="card-body p-0">
+                        <div class="card-body text-light p-0">
                             <div class="table-responsive">
                                 <table class="table table-dark table-hover mb-0">
                                     <thead>
@@ -175,7 +175,7 @@ include INCLUDES_PATH . 'header.php';
                                     <tbody>
                                         <?php if (empty($stats['recent_bookings'])): ?>
                                             <tr>
-                                                <td colspan="5" class="text-center text-muted py-4">No bookings yet</td>
+                                                <td colspan="5" class="text-center text-light py-4">No bookings yet</td>
                                             </tr>
                                         <?php else: ?>
                                             <?php foreach ($stats['recent_bookings'] as $booking): ?>
@@ -210,7 +210,7 @@ include INCLUDES_PATH . 'header.php';
                                 <i class="bi bi-graph-up me-2"></i>This Month
                             </h6>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body text-light">
                             <div class="d-flex justify-content-between align-items-center mb-3">
                                 <span>Bookings</span>
                                 <span class="badge bg-info text-dark fs-6"><?php echo $stats['monthly_bookings']; ?></span>
@@ -228,11 +228,11 @@ include INCLUDES_PATH . 'header.php';
                                 <i class="bi bi-activity me-2"></i>Recent Activity
                             </h6>
                         </div>
-                        <div class="card-body p-0">
+                        <div class="card-body text-light p-0">
                             <ul class="list-group list-group-flush">
                                 <?php foreach (array_slice($recentLogs, 0, 5) as $log): ?>
                                     <li class="list-group-item bg-dark text-light border-secondary">
-                                        <small class="text-muted d-block">
+                                        <small class="text-light d-block">
                                             <?php echo formatDateTime($log['timestamp']); ?>
                                         </small>
                                         <span class="small">
@@ -261,7 +261,7 @@ include INCLUDES_PATH . 'header.php';
                                 <i class="bi bi-lightning me-2"></i>Quick Actions
                             </h5>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body text-light">
                             <div class="row g-3">
                                 <div class="col-md-3">
                                     <a href="<?php echo SITE_URL; ?>/admin/movies.php?action=add" class="btn btn-outline-danger w-100 py-3">

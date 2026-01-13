@@ -25,17 +25,17 @@ include INCLUDES_PATH . 'header.php';
         <div class="col-lg-5 col-md-7">
             
             <div class="card bg-dark border-secondary shadow-lg">
-                <div class="card-body p-5 text-center">
+                <div class="card-body text-light p-5 text-center">
                     
                     <?php if (empty($token)): ?>
                         <i class="bi bi-exclamation-circle text-warning fs-1 mb-3 d-block"></i>
                         <h4>Invalid Verification Link</h4>
-                        <p class="text-muted">Please check your email for the correct verification link.</p>
+                        <p class="text-light">Please check your email for the correct verification link.</p>
                         
                     <?php elseif ($result && $result['success']): ?>
                         <i class="bi bi-check-circle text-success fs-1 mb-3 d-block"></i>
                         <h4>Email Verified!</h4>
-                        <p class="text-muted"><?php echo htmlspecialchars($result['message']); ?></p>
+                        <p class="text-light"><?php echo htmlspecialchars($result['message']); ?></p>
                         <a href="<?php echo SITE_URL; ?>/login.php" class="btn btn-danger btn-lg">
                             <i class="bi bi-box-arrow-in-right me-2"></i>Login Now
                         </a>
@@ -43,7 +43,7 @@ include INCLUDES_PATH . 'header.php';
                     <?php else: ?>
                         <i class="bi bi-x-circle text-danger fs-1 mb-3 d-block"></i>
                         <h4>Verification Failed</h4>
-                        <p class="text-muted"><?php echo htmlspecialchars($result['message'] ?? 'Unknown error'); ?></p>
+                        <p class="text-light"><?php echo htmlspecialchars($result['message'] ?? 'Unknown error'); ?></p>
                         <a href="<?php echo SITE_URL; ?>/register.php" class="btn btn-outline-danger">
                             Register Again
                         </a>

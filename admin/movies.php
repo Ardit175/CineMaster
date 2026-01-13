@@ -189,56 +189,56 @@ include INCLUDES_PATH . 'header.php';
                 <div class="card-header bg-danger">
                     <h5 class="mb-0"><i class="bi bi-plus-circle me-2"></i>Add New Movie</h5>
                 </div>
-                <div class="card-body">
+                <div class="card-body text-light">
                     <form method="POST" action="" enctype="multipart/form-data">
                         <input type="hidden" name="csrf_token" value="<?php echo $csrfToken; ?>">
                         <input type="hidden" name="action" value="add">
                         
                         <div class="row g-3">
                             <div class="col-md-8">
-                                <label class="form-label">Movie Title</label>
+                                <label class="form-label text-light">Movie Title</label>
                                 <input type="text" class="form-control bg-dark text-light border-secondary" 
                                        name="title" required>
                             </div>
                             <div class="col-md-4">
-                                <label class="form-label">Duration (minutes)</label>
+                                <label class="form-label text-light">Duration (minutes)</label>
                                 <input type="number" class="form-control bg-dark text-light border-secondary" 
                                        name="duration" required>
                             </div>
                             <div class="col-12">
-                                <label class="form-label">Description</label>
+                                <label class="form-label text-light">Description</label>
                                 <textarea class="form-control bg-dark text-light border-secondary" 
                                           name="description" rows="4"></textarea>
                             </div>
                             <div class="col-md-4">
-                                <label class="form-label">Release Date</label>
+                                <label class="form-label text-light">Release Date</label>
                                 <input type="date" class="form-control bg-dark text-light border-secondary" 
                                        name="release_date" required>
                             </div>
                             <div class="col-md-4">
-                                <label class="form-label">Status</label>
+                                <label class="form-label text-light">Status</label>
                                 <select class="form-select bg-dark text-light border-secondary" name="status">
                                     <option value="coming_soon">Coming Soon</option>
                                     <option value="now_showing">Now Showing</option>
                                 </select>
                             </div>
                             <div class="col-md-4">
-                                <label class="form-label">Rating (0-10)</label>
+                                <label class="form-label text-light">Rating (0-10)</label>
                                 <input type="number" class="form-control bg-dark text-light border-secondary" 
                                        name="rating" step="0.1" min="0" max="10" value="0">
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label">Poster Image</label>
+                                <label class="form-label text-light">Poster Image</label>
                                 <input type="file" class="form-control bg-dark text-light border-secondary" 
                                        name="poster" accept="image/*">
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label">Trailer URL (YouTube Embed)</label>
+                                <label class="form-label text-light">Trailer URL (YouTube Embed)</label>
                                 <input type="url" class="form-control bg-dark text-light border-secondary" 
                                        name="trailer_url" placeholder="https://www.youtube.com/embed/...">
                             </div>
                             <div class="col-12">
-                                <label class="form-label">Genres</label>
+                                <label class="form-label text-light">Genres</label>
                                 <div class="row g-2">
                                     <?php foreach ($genres as $genre): ?>
                                         <div class="col-md-3 col-6">
@@ -269,7 +269,7 @@ include INCLUDES_PATH . 'header.php';
             <?php else: ?>
             <!-- Movies Table -->
             <div class="card bg-dark border-secondary">
-                <div class="card-body p-0">
+                <div class="card-body text-light p-0">
                     <div class="table-responsive">
                         <table class="table table-dark table-hover mb-0">
                             <thead class="table-secondary">
@@ -293,7 +293,7 @@ include INCLUDES_PATH . 'header.php';
                                         </td>
                                         <td>
                                             <strong><?php echo htmlspecialchars($movie['title']); ?></strong>
-                                            <br><small class="text-muted"><?php echo $movie['genres']; ?></small>
+                                            <br><small class="text-light"><?php echo $movie['genres']; ?></small>
                                         </td>
                                         <td><?php echo $movie['duration']; ?> min</td>
                                         <td><?php echo formatDate($movie['release_date']); ?></td>

@@ -230,12 +230,12 @@ function initializeSearchAutocomplete() {
                 suggestionsContainer.innerHTML = data.map(movie => `
                     <a href="/movie.php?id=${movie.id}" class="list-group-item list-group-item-action bg-dark text-light">
                         <strong>${escapeHtml(movie.title)}</strong>
-                        <small class="text-muted d-block">${movie.genres || 'No genres'}</small>
+                        <small class="text-light d-block">${movie.genres || 'No genres'}</small>
                     </a>
                 `).join('');
                 suggestionsContainer.style.display = 'block';
             } else {
-                suggestionsContainer.innerHTML = '<div class="p-3 text-muted">No results found</div>';
+                suggestionsContainer.innerHTML = '<div class="p-3 text-light">No results found</div>';
                 suggestionsContainer.style.display = 'block';
             }
         } catch (error) {

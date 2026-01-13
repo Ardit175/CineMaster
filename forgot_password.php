@@ -51,8 +51,8 @@ include INCLUDES_PATH . 'header.php';
                     </h3>
                 </div>
                 
-                <div class="card-body p-4">
-                    <p class="text-muted text-center mb-4">
+                <div class="card-body text-light p-4">
+                    <p class="text-light text-center mb-4">
                         Enter your email address and we'll send you a link to reset your password.
                     </p>
                     
@@ -78,7 +78,7 @@ include INCLUDES_PATH . 'header.php';
                         <input type="hidden" name="csrf_token" value="<?php echo $csrfToken; ?>">
                         
                         <div class="mb-4">
-                            <label for="email" class="form-label">
+                            <label for="email" class="form-label text-light">
                                 <i class="bi bi-envelope me-1"></i>Email Address
                             </label>
                             <input type="email" class="form-control bg-dark text-light border-secondary" 

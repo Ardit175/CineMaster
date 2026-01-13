@@ -96,7 +96,7 @@ include INCLUDES_PATH . 'header.php';
                         <i class="bi bi-receipt me-2"></i>Order Summary
                     </h5>
                 </div>
-                <div class="card-body">
+                <div class="card-body text-light">
                     <div class="row">
                         <div class="col-md-3 mb-3 mb-md-0">
                             <img src="<?php echo UPLOADS_URL; ?>/movies/<?php echo $showtime['poster_image']; ?>" 
@@ -108,15 +108,15 @@ include INCLUDES_PATH . 'header.php';
                             <h4 class="text-danger mb-3"><?php echo htmlspecialchars($showtime['movie_title']); ?></h4>
                             <div class="row">
                                 <div class="col-sm-6 mb-2">
-                                    <small class="text-muted">Date & Time</small>
+                                    <small class="text-light">Date & Time</small>
                                     <p class="mb-0"><?php echo formatDateTime($showtime['start_time']); ?></p>
                                 </div>
                                 <div class="col-sm-6 mb-2">
-                                    <small class="text-muted">Theater</small>
+                                    <small class="text-light">Theater</small>
                                     <p class="mb-0"><?php echo htmlspecialchars($showtime['theater_name']); ?></p>
                                 </div>
                                 <div class="col-sm-6 mb-2">
-                                    <small class="text-muted">Seats (<?php echo count($seats); ?>)</small>
+                                    <small class="text-light">Seats (<?php echo count($seats); ?>)</small>
                                     <p class="mb-0">
                                         <?php foreach ($seats as $seat): ?>
                                             <span class="badge bg-danger me-1"><?php echo htmlspecialchars($seat); ?></span>
@@ -124,7 +124,7 @@ include INCLUDES_PATH . 'header.php';
                                     </p>
                                 </div>
                                 <div class="col-sm-6 mb-2">
-                                    <small class="text-muted">Duration</small>
+                                    <small class="text-light">Duration</small>
                                     <p class="mb-0"><?php echo $showtime['duration']; ?> minutes</p>
                                 </div>
                             </div>
@@ -135,7 +135,7 @@ include INCLUDES_PATH . 'header.php';
                                 <span>Tickets (<?php echo count($seats); ?> x <?php echo formatPrice($showtime['price']); ?>)</span>
                                 <span><?php echo formatPrice(count($seats) * $showtime['price']); ?></span>
                             </div>
-                            <div class="d-flex justify-content-between text-muted">
+                            <div class="d-flex justify-content-between text-light">
                                 <span>Booking Fee</span>
                                 <span><?php echo formatPrice($bookingFee); ?></span>
                             </div>
@@ -156,18 +156,18 @@ include INCLUDES_PATH . 'header.php';
                         <i class="bi bi-credit-card me-2"></i>Payment Details
                     </h5>
                 </div>
-                <div class="card-body">
+                <div class="card-body text-light">
                     <!-- Customer Info -->
                     <div class="mb-4">
-                        <h6 class="text-muted mb-3">Customer Information</h6>
+                        <h6 class="text-light mb-3">Customer Information</h6>
                         <div class="row g-3">
                             <div class="col-md-6">
-                                <label class="form-label">Name</label>
+                                <label class="form-label text-light">Name</label>
                                 <input type="text" class="form-control bg-dark text-light border-secondary" 
                                        value="<?php echo htmlspecialchars($user['name']); ?>" readonly>
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label">Email</label>
+                                <label class="form-label text-light">Email</label>
                                 <input type="email" class="form-control bg-dark text-light border-secondary" 
                                        value="<?php echo htmlspecialchars($user['email']); ?>" readonly>
                             </div>
@@ -184,7 +184,7 @@ include INCLUDES_PATH . 'header.php';
                         <input type="hidden" name="total" value="<?php echo $totalAmount; ?>">
                         
                         <div class="mb-4">
-                            <h6 class="text-muted mb-3">Card Information</h6>
+                            <h6 class="text-light mb-3">Card Information</h6>
                             
                             <!-- Demo Mode Notice -->
                             <div class="alert alert-info mb-3">
@@ -215,7 +215,7 @@ include INCLUDES_PATH . 'header.php';
                     </form>
                     
                     <div class="text-center mt-4">
-                        <p class="text-muted small mb-0">
+                        <p class="text-light small mb-0">
                             <i class="bi bi-shield-lock me-1"></i>
                             Your payment is secured with SSL encryption
                         </p>

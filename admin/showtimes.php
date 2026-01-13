@@ -237,14 +237,14 @@ include INCLUDES_PATH . 'header.php';
                 <div class="card-header bg-danger">
                     <h5 class="mb-0"><i class="bi bi-plus-circle me-2"></i>Schedule New Showtime</h5>
                 </div>
-                <div class="card-body">
+                <div class="card-body text-light">
                     <form method="POST" action="">
                         <input type="hidden" name="csrf_token" value="<?php echo $csrfToken; ?>">
                         <input type="hidden" name="action" value="add">
                         
                         <div class="row g-3">
                             <div class="col-md-6">
-                                <label class="form-label">Select Movie</label>
+                                <label class="form-label text-light">Select Movie</label>
                                 <select name="movie_id" class="form-select bg-dark text-light border-secondary" required>
                                     <option value="">-- Select Movie --</option>
                                     <?php foreach ($movies as $movie): ?>
@@ -256,7 +256,7 @@ include INCLUDES_PATH . 'header.php';
                                 </select>
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label">Select Theater</label>
+                                <label class="form-label text-light">Select Theater</label>
                                 <select name="theater_id" class="form-select bg-dark text-light border-secondary" required>
                                     <option value="">-- Select Theater --</option>
                                     <?php foreach ($theaters as $theater): ?>
@@ -268,18 +268,18 @@ include INCLUDES_PATH . 'header.php';
                                 </select>
                             </div>
                             <div class="col-md-4">
-                                <label class="form-label">Show Date</label>
+                                <label class="form-label text-light">Show Date</label>
                                 <input type="date" class="form-control bg-dark text-light border-secondary" 
                                        name="show_date" required 
                                        min="<?php echo date('Y-m-d'); ?>">
                             </div>
                             <div class="col-md-4">
-                                <label class="form-label">Show Time</label>
+                                <label class="form-label text-light">Show Time</label>
                                 <input type="time" class="form-control bg-dark text-light border-secondary" 
                                        name="show_time" required>
                             </div>
                             <div class="col-md-4">
-                                <label class="form-label">Ticket Price ($)</label>
+                                <label class="form-label text-light">Ticket Price ($)</label>
                                 <input type="number" class="form-control bg-dark text-light border-secondary" 
                                        name="price" step="0.01" min="0" value="12.99" required>
                             </div>
@@ -304,15 +304,15 @@ include INCLUDES_PATH . 'header.php';
             
             <!-- Filters -->
             <div class="card bg-dark border-secondary mb-4">
-                <div class="card-body">
+                <div class="card-body text-light">
                     <form method="GET" class="row g-3">
                         <div class="col-md-3">
-                            <label class="form-label">Filter by Date</label>
+                            <label class="form-label text-light">Filter by Date</label>
                             <input type="date" name="date" class="form-control bg-dark text-light border-secondary"
                                    value="<?php echo htmlspecialchars($filterDate); ?>">
                         </div>
                         <div class="col-md-3">
-                            <label class="form-label">Filter by Movie</label>
+                            <label class="form-label text-light">Filter by Movie</label>
                             <select name="movie" class="form-select bg-dark text-light border-secondary">
                                 <option value="">All Movies</option>
                                 <?php foreach ($movies as $movie): ?>
@@ -324,7 +324,7 @@ include INCLUDES_PATH . 'header.php';
                             </select>
                         </div>
                         <div class="col-md-3">
-                            <label class="form-label">Filter by Theater</label>
+                            <label class="form-label text-light">Filter by Theater</label>
                             <select name="theater" class="form-select bg-dark text-light border-secondary">
                                 <option value="">All Theaters</option>
                                 <?php foreach ($theaters as $theater): ?>
@@ -347,7 +347,7 @@ include INCLUDES_PATH . 'header.php';
             
             <!-- Showtimes Table -->
             <div class="card bg-dark border-secondary">
-                <div class="card-body p-0">
+                <div class="card-body text-light p-0">
                     <div class="table-responsive">
                         <table class="table table-dark table-hover mb-0">
                             <thead class="table-secondary">
@@ -364,7 +364,7 @@ include INCLUDES_PATH . 'header.php';
                             <tbody>
                                 <?php if (empty($showtimes)): ?>
                                     <tr>
-                                        <td colspan="7" class="text-center py-4 text-muted">
+                                        <td colspan="7" class="text-center py-4 text-light">
                                             No showtimes found.
                                         </td>
                                     </tr>
@@ -374,10 +374,10 @@ include INCLUDES_PATH . 'header.php';
                                             $totalSeats = $show['seats_per_row'] * $show['total_rows'];
                                             $isPast = strtotime($show['show_date']) < strtotime(date('Y-m-d'));
                                         ?>
-                                        <tr class="<?php echo $isPast ? 'text-muted' : ''; ?>">
+                                        <tr class="<?php echo $isPast ? 'text-light' : ''; ?>">
                                             <td>
                                                 <strong><?php echo htmlspecialchars($show['movie_title']); ?></strong>
-                                                <br><small class="text-muted"><?php echo $show['duration']; ?> min</small>
+                                                <br><small class="text-light"><?php echo $show['duration']; ?> min</small>
                                             </td>
                                             <td><?php echo htmlspecialchars($show['theater_name']); ?></td>
                                             <td><?php echo formatDate($show['show_date']); ?></td>
@@ -413,7 +413,7 @@ include INCLUDES_PATH . 'header.php';
                                                         </button>
                                                     </form>
                                                 <?php else: ?>
-                                                    <span class="text-muted" title="Has bookings">
+                                                    <span class="text-light" title="Has bookings">
                                                         <i class="bi bi-lock"></i>
                                                     </span>
                                                 <?php endif; ?>

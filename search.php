@@ -37,7 +37,7 @@ include INCLUDES_PATH . 'header.php';
 <div class="container py-5">
     <!-- Search Form -->
     <div class="card bg-dark border-secondary mb-5">
-        <div class="card-body p-4">
+        <div class="card-body text-light p-4">
             <form action="" method="GET" class="row g-3">
                 <div class="col-md-6">
                     <div class="input-group">
@@ -72,7 +72,7 @@ include INCLUDES_PATH . 'header.php';
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
             <h2 class="fw-bold"><?php echo htmlspecialchars($pageTitle); ?></h2>
-            <p class="text-muted mb-0">
+            <p class="text-light mb-0">
                 <?php echo count($movies); ?> result<?php echo count($movies) !== 1 ? 's' : ''; ?> found
             </p>
         </div>
@@ -86,9 +86,9 @@ include INCLUDES_PATH . 'header.php';
     <!-- Results Grid -->
     <?php if (empty($movies)): ?>
         <div class="text-center py-5">
-            <i class="bi bi-search fs-1 text-muted mb-3 d-block"></i>
+            <i class="bi bi-search fs-1 text-light mb-3 d-block"></i>
             <h4>No movies found</h4>
-            <p class="text-muted">Try different keywords or browse our collection</p>
+            <p class="text-light">Try different keywords or browse our collection</p>
             <a href="<?php echo SITE_URL; ?>/movies.php" class="btn btn-danger">
                 <i class="bi bi-camera-reels me-2"></i>Browse All Movies
             </a>
@@ -126,7 +126,7 @@ include INCLUDES_PATH . 'header.php';
                                     <?php echo htmlspecialchars($movie['title']); ?>
                                 </a>
                             </h6>
-                            <small class="text-muted">
+                            <small class="text-light">
                                 <i class="bi bi-clock me-1"></i><?php echo $movie['duration']; ?> min
                             </small>
                             <?php if ($movie['genres']): ?>

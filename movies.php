@@ -46,7 +46,7 @@ include INCLUDES_PATH . 'header.php';
             <h1 class="fw-bold">
                 <i class="bi bi-camera-reels text-danger me-2"></i><?php echo htmlspecialchars($pageTitle); ?>
             </h1>
-            <p class="text-muted">
+            <p class="text-light">
                 <?php echo count($movies); ?> movie<?php echo count($movies) !== 1 ? 's' : ''; ?> found
             </p>
         </div>
@@ -89,9 +89,9 @@ include INCLUDES_PATH . 'header.php';
     <!-- Movies Grid -->
     <?php if (empty($movies)): ?>
         <div class="text-center py-5">
-            <i class="bi bi-film fs-1 text-muted mb-3 d-block"></i>
+            <i class="bi bi-film fs-1 text-light mb-3 d-block"></i>
             <h4>No movies found</h4>
-            <p class="text-muted">Try adjusting your filters</p>
+            <p class="text-light">Try adjusting your filters</p>
             <a href="<?php echo SITE_URL; ?>/movies.php" class="btn btn-outline-danger">View All Movies</a>
         </div>
     <?php else: ?>
@@ -134,10 +134,10 @@ include INCLUDES_PATH . 'header.php';
                                 </a>
                             </h6>
                             <div class="d-flex justify-content-between align-items-center">
-                                <small class="text-muted">
+                                <small class="text-light">
                                     <i class="bi bi-clock me-1"></i><?php echo $movie['duration']; ?> min
                                 </small>
-                                <small class="text-muted">
+                                <small class="text-light">
                                     <?php echo formatDate($movie['release_date'], 'M Y'); ?>
                                 </small>
                             </div>

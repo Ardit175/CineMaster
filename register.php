@@ -92,7 +92,7 @@ include INCLUDES_PATH . 'header.php';
                     </h3>
                 </div>
                 
-                <div class="card-body p-4">
+                <div class="card-body text-light p-4">
                     <!-- Display Errors -->
                     <?php if (!empty($errors)): ?>
                         <div class="alert alert-danger alert-dismissible fade show">
@@ -121,7 +121,7 @@ include INCLUDES_PATH . 'header.php';
                         
                         <!-- Name Field -->
                         <div class="mb-3">
-                            <label for="name" class="form-label">
+                            <label for="name" class="form-label text-light">
                                 <i class="bi bi-person me-1"></i>Full Name
                             </label>
                             <input type="text" class="form-control bg-dark text-light border-secondary" 
@@ -133,7 +133,7 @@ include INCLUDES_PATH . 'header.php';
                         
                         <!-- Email Field -->
                         <div class="mb-3">
-                            <label for="email" class="form-label">
+                            <label for="email" class="form-label text-light">
                                 <i class="bi bi-envelope me-1"></i>Email Address
                             </label>
                             <input type="email" class="form-control bg-dark text-light border-secondary" 
@@ -145,7 +145,7 @@ include INCLUDES_PATH . 'header.php';
                         
                         <!-- Password Field -->
                         <div class="mb-3">
-                            <label for="password" class="form-label">
+                            <label for="password" class="form-label text-light">
                                 <i class="bi bi-lock me-1"></i>Password
                             </label>
                             <div class="input-group">
@@ -156,14 +156,14 @@ include INCLUDES_PATH . 'header.php';
                                     <i class="bi bi-eye"></i>
                                 </button>
                             </div>
-                            <div class="form-text text-muted">
+                            <div class="form-text text-light">
                                 <small>Min 8 characters, with uppercase, lowercase, and number.</small>
                             </div>
                         </div>
                         
                         <!-- Confirm Password Field -->
                         <div class="mb-4">
-                            <label for="confirm_password" class="form-label">
+                            <label for="confirm_password" class="form-label text-light">
                                 <i class="bi bi-lock-fill me-1"></i>Confirm Password
                             </label>
                             <input type="password" class="form-control bg-dark text-light border-secondary" 
@@ -177,13 +177,13 @@ include INCLUDES_PATH . 'header.php';
                             <div class="progress" style="height: 5px;">
                                 <div class="progress-bar" id="passwordStrength" role="progressbar" style="width: 0%"></div>
                             </div>
-                            <small class="text-muted" id="passwordStrengthText"></small>
+                            <small class="text-light" id="passwordStrengthText"></small>
                         </div>
                         
                         <!-- Terms Checkbox -->
                         <div class="mb-4 form-check">
                             <input type="checkbox" class="form-check-input" id="terms" required>
-                            <label class="form-check-label text-muted" for="terms">
+                            <label class="form-check-label text-light" for="terms">
                                 I agree to the <a href="#" class="text-danger">Terms of Service</a> 
                                 and <a href="#" class="text-danger">Privacy Policy</a>
                             </label>
@@ -199,7 +199,7 @@ include INCLUDES_PATH . 'header.php';
                     
                     <!-- Login Link -->
                     <div class="text-center mt-4">
-                        <p class="text-muted mb-0">
+                        <p class="text-light mb-0">
                             Already have an account? 
                             <a href="<?php echo SITE_URL; ?>/login.php" class="text-danger text-decoration-none fw-bold">
                                 Login here

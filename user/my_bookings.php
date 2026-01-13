@@ -36,14 +36,14 @@ include INCLUDES_PATH . 'header.php';
         <!-- Sidebar -->
         <div class="col-lg-3 mb-4">
             <div class="card bg-dark border-secondary">
-                <div class="card-body text-center">
+                <div class="card-body text-light text-center">
                     <img src="<?php echo UPLOADS_URL; ?>/profiles/<?php echo $user['profile_photo'] ?? 'default.png'; ?>" 
                          class="rounded-circle mb-3" width="80" height="80"
                          alt="Profile Photo"
                          onerror="this.src='<?php echo ASSETS_URL; ?>/images/default-avatar.png'"
                          style="object-fit: cover;">
                     <h5 class="mb-1"><?php echo htmlspecialchars($user['name']); ?></h5>
-                    <p class="text-muted small mb-0"><?php echo htmlspecialchars($user['email']); ?></p>
+                    <p class="text-light small mb-0"><?php echo htmlspecialchars($user['email']); ?></p>
                 </div>
             </div>
             
@@ -71,28 +71,28 @@ include INCLUDES_PATH . 'header.php';
             <div class="row g-3 mb-4">
                 <div class="col-md-4">
                     <div class="card bg-dark border-secondary h-100">
-                        <div class="card-body text-center">
+                        <div class="card-body text-light text-center">
                             <i class="bi bi-calendar-check text-success fs-1 mb-2 d-block"></i>
                             <h3 class="mb-1"><?php echo count($upcomingBookings); ?></h3>
-                            <small class="text-muted">Upcoming</small>
+                            <small class="text-light">Upcoming</small>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="card bg-dark border-secondary h-100">
-                        <div class="card-body text-center">
+                        <div class="card-body text-light text-center">
                             <i class="bi bi-check-circle text-info fs-1 mb-2 d-block"></i>
                             <h3 class="mb-1"><?php echo count($pastBookings); ?></h3>
-                            <small class="text-muted">Past Bookings</small>
+                            <small class="text-light">Past Bookings</small>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="card bg-dark border-secondary h-100">
-                        <div class="card-body text-center">
+                        <div class="card-body text-light text-center">
                             <i class="bi bi-receipt text-warning fs-1 mb-2 d-block"></i>
                             <h3 class="mb-1"><?php echo count($bookings); ?></h3>
-                            <small class="text-muted">Total Bookings</small>
+                            <small class="text-light">Total Bookings</small>
                         </div>
                     </div>
                 </div>
@@ -119,9 +119,9 @@ include INCLUDES_PATH . 'header.php';
                 <div class="tab-pane fade show active" id="upcoming" role="tabpanel">
                     <?php if (empty($upcomingBookings)): ?>
                         <div class="text-center py-5">
-                            <i class="bi bi-calendar-x fs-1 text-muted mb-3 d-block"></i>
+                            <i class="bi bi-calendar-x fs-1 text-light mb-3 d-block"></i>
                             <h5>No upcoming bookings</h5>
-                            <p class="text-muted">Ready for your next movie experience?</p>
+                            <p class="text-light">Ready for your next movie experience?</p>
                             <a href="<?php echo SITE_URL; ?>/movies.php" class="btn btn-danger">
                                 <i class="bi bi-film me-2"></i>Browse Movies
                             </a>
@@ -139,7 +139,7 @@ include INCLUDES_PATH . 'header.php';
                                                      onerror="this.src='<?php echo ASSETS_URL; ?>/images/default-poster.jpg'">
                                             </div>
                                             <div class="col-md-10">
-                                                <div class="card-body">
+                                                <div class="card-body text-light">
                                                     <div class="d-flex justify-content-between align-items-start">
                                                         <div>
                                                             <h5 class="card-title text-danger mb-1">
@@ -156,19 +156,19 @@ include INCLUDES_PATH . 'header.php';
                                                     
                                                     <div class="row mt-3">
                                                         <div class="col-sm-6 col-md-3 mb-2">
-                                                            <small class="text-muted d-block">Date & Time</small>
+                                                            <small class="text-light d-block">Date & Time</small>
                                                             <strong><?php echo formatDateTime($booking['start_time']); ?></strong>
                                                         </div>
                                                         <div class="col-sm-6 col-md-3 mb-2">
-                                                            <small class="text-muted d-block">Theater</small>
+                                                            <small class="text-light d-block">Theater</small>
                                                             <strong><?php echo htmlspecialchars($booking['theater_name']); ?></strong>
                                                         </div>
                                                         <div class="col-sm-6 col-md-3 mb-2">
-                                                            <small class="text-muted d-block">Seats</small>
+                                                            <small class="text-light d-block">Seats</small>
                                                             <strong><?php echo $booking['seats']; ?></strong>
                                                         </div>
                                                         <div class="col-sm-6 col-md-3 mb-2">
-                                                            <small class="text-muted d-block">Total</small>
+                                                            <small class="text-light d-block">Total</small>
                                                             <strong class="text-success"><?php echo formatPrice($booking['total_amount']); ?></strong>
                                                         </div>
                                                     </div>
@@ -193,9 +193,9 @@ include INCLUDES_PATH . 'header.php';
                 <div class="tab-pane fade" id="past" role="tabpanel">
                     <?php if (empty($pastBookings)): ?>
                         <div class="text-center py-5">
-                            <i class="bi bi-clock-history fs-1 text-muted mb-3 d-block"></i>
+                            <i class="bi bi-clock-history fs-1 text-light mb-3 d-block"></i>
                             <h5>No past bookings</h5>
-                            <p class="text-muted">Your booking history will appear here</p>
+                            <p class="text-light">Your booking history will appear here</p>
                         </div>
                     <?php else: ?>
                         <div class="table-responsive">

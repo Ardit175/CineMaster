@@ -17,7 +17,7 @@ include INCLUDES_PATH . 'header.php';
         </div>
         <h1 class="display-1 fw-bold text-danger">404</h1>
         <h2 class="mb-4">Page Not Found</h2>
-        <p class="lead text-muted mb-4">
+        <p class="lead text-light mb-4">
             Oops! The page you're looking for seems to have disappeared into the cinema darkness.
         </p>
         <div class="d-flex gap-3 justify-content-center">

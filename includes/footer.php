@@ -10,7 +10,7 @@
                     <h5 class="text-danger fw-bold mb-3">
                         <i class="bi bi-film me-2"></i>CineMaster
                     </h5>
-                    <p class="text-muted">
+                    <p class="text-light">
                         Your premier destination for the best cinema experience. 
                         Book tickets for the latest movies, enjoy premium seating, 
                         and create unforgettable memories.
@@ -25,25 +25,25 @@
                 
                 <!-- Quick Links -->
                 <div class="col-lg-2 col-md-6 mb-4">
-                    <h6 class="text-uppercase fw-bold mb-3">Quick Links</h6>
+                    <h6 class="text-uppercase fw-bold mb-3 text-light">Quick Links</h6>
                     <ul class="list-unstyled">
                         <li class="mb-2">
-                            <a href="<?php echo SITE_URL; ?>" class="text-muted text-decoration-none hover-effect">
+                            <a href="<?php echo SITE_URL; ?>" class="text-light text-decoration-none hover-effect">
                                 <i class="bi bi-chevron-right me-1"></i> Home
                             </a>
                         </li>
                         <li class="mb-2">
-                            <a href="<?php echo SITE_URL; ?>/movies.php" class="text-muted text-decoration-none hover-effect">
+                            <a href="<?php echo SITE_URL; ?>/movies.php" class="text-light text-decoration-none hover-effect">
                                 <i class="bi bi-chevron-right me-1"></i> Movies
                             </a>
                         </li>
                         <li class="mb-2">
-                            <a href="<?php echo SITE_URL; ?>/movies.php?status=coming_soon" class="text-muted text-decoration-none hover-effect">
+                            <a href="<?php echo SITE_URL; ?>/movies.php?status=coming_soon" class="text-light text-decoration-none hover-effect">
                                 <i class="bi bi-chevron-right me-1"></i> Coming Soon
                             </a>
                         </li>
                         <li class="mb-2">
-                            <a href="#" class="text-muted text-decoration-none hover-effect">
+                            <a href="#" class="text-light text-decoration-none hover-effect">
                                 <i class="bi bi-chevron-right me-1"></i> Contact Us
                             </a>
                         </li>
@@ -52,25 +52,25 @@
                 
                 <!-- Genres -->
                 <div class="col-lg-2 col-md-6 mb-4">
-                    <h6 class="text-uppercase fw-bold mb-3">Genres</h6>
+                    <h6 class="text-uppercase fw-bold mb-3 text-light">Genres</h6>
                     <ul class="list-unstyled">
                         <li class="mb-2">
-                            <a href="<?php echo SITE_URL; ?>/movies.php?genre=1" class="text-muted text-decoration-none hover-effect">
+                            <a href="<?php echo SITE_URL; ?>/movies.php?genre=1" class="text-light text-decoration-none hover-effect">
                                 <i class="bi bi-chevron-right me-1"></i> Action
                             </a>
                         </li>
                         <li class="mb-2">
-                            <a href="<?php echo SITE_URL; ?>/movies.php?genre=2" class="text-muted text-decoration-none hover-effect">
+                            <a href="<?php echo SITE_URL; ?>/movies.php?genre=2" class="text-light text-decoration-none hover-effect">
                                 <i class="bi bi-chevron-right me-1"></i> Comedy
                             </a>
                         </li>
                         <li class="mb-2">
-                            <a href="<?php echo SITE_URL; ?>/movies.php?genre=4" class="text-muted text-decoration-none hover-effect">
+                            <a href="<?php echo SITE_URL; ?>/movies.php?genre=4" class="text-light text-decoration-none hover-effect">
                                 <i class="bi bi-chevron-right me-1"></i> Horror
                             </a>
                         </li>
                         <li class="mb-2">
-                            <a href="<?php echo SITE_URL; ?>/movies.php?genre=5" class="text-muted text-decoration-none hover-effect">
+                            <a href="<?php echo SITE_URL; ?>/movies.php?genre=5" class="text-light text-decoration-none hover-effect">
                                 <i class="bi bi-chevron-right me-1"></i> Sci-Fi
                             </a>
                         </li>
@@ -79,8 +79,8 @@
                 
                 <!-- Contact Info -->
                 <div class="col-lg-4 col-md-6 mb-4">
-                    <h6 class="text-uppercase fw-bold mb-3">Contact Us</h6>
-                    <ul class="list-unstyled text-muted">
+                    <h6 class="text-uppercase fw-bold mb-3 text-light">Contact Us</h6>
+                    <ul class="list-unstyled text-light">
                         <li class="mb-2">
                             <i class="bi bi-geo-alt text-danger me-2"></i>
                             123 Cinema Street, Movie City, MC 12345
@@ -106,16 +106,16 @@
             <!-- Copyright -->
             <div class="row align-items-center">
                 <div class="col-md-6 text-center text-md-start">
-                    <p class="text-muted mb-0">
+                    <p class="text-light mb-0">
                         &copy; <?php echo date('Y'); ?> CineMaster. All Rights Reserved.
                     </p>
                 </div>
                 <div class="col-md-6 text-center text-md-end">
-                    <p class="text-muted mb-0">
+                    <p class="text-light mb-0">
                         <small>
-                            <a href="#" class="text-muted text-decoration-none">Privacy Policy</a>
+                            <a href="#" class="text-light text-decoration-none">Privacy Policy</a>
                             <span class="mx-2">|</span>
-                            <a href="#" class="text-muted text-decoration-none">Terms of Service</a>
+                            <a href="#" class="text-light text-decoration-none">Terms of Service</a>
                         </small>
                     </p>
                 </div>

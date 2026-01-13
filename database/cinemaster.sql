@@ -192,43 +192,43 @@ INSERT INTO theaters (name, total_seats, rows_count, seats_per_row) VALUES
 
 -- Insert sample movies
 INSERT INTO movies (title, description, duration, release_date, poster_image, trailer_url, status, rating) VALUES 
-('The Dark Knight Returns', 'Batman faces his greatest challenge yet as a new villain threatens Gotham City with chaos and destruction.', 165, '2024-12-01', 'dark_knight.jpg', 'https://www.youtube.com/embed/EXeTwQWrcwY', 'now_showing', 9.2),
-('Interstellar 2', 'A team of explorers travel through a newly discovered wormhole to ensure humanity survival.', 180, '2024-11-15', 'interstellar.jpg', 'https://www.youtube.com/embed/zSWdZVtXT7E', 'now_showing', 8.8),
-('The Comedy Club', 'A hilarious journey of a failed comedian trying to make it big in New York City.', 120, '2024-12-10', 'comedy_club.jpg', 'https://www.youtube.com/embed/dQw4w9WgXcQ', 'now_showing', 7.5),
-('Haunted Mansion', 'A family discovers their new home has terrifying secrets that refuse to stay buried.', 110, '2024-12-20', 'haunted.jpg', 'https://www.youtube.com/embed/dQw4w9WgXcQ', 'now_showing', 7.8),
-('Space Warriors', 'An epic space adventure where humanity fight for survival against an alien invasion.', 145, '2025-01-15', 'space_warriors.jpg', 'https://www.youtube.com/embed/dQw4w9WgXcQ', 'coming_soon', 0.0),
-('Love in Paris', 'A romantic tale of two strangers who meet in the city of lights and discover true love.', 125, '2025-02-14', 'love_paris.jpg', 'https://www.youtube.com/embed/dQw4w9WgXcQ', 'coming_soon', 0.0);
+('The Dark Knight', 'When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.', 152, '2008-07-18', 'dark_knight.jpg', 'https://www.youtube.com/embed/EXeTwQWrcwY', 'now_showing', 9.0),
+('Interstellar', 'A team of explorers travel through a wormhole in space in an attempt to ensure humanity''s survival. A journey beyond the stars where love transcends dimensions.', 169, '2014-11-07', 'interstellar.jpg', 'https://www.youtube.com/embed/zSWdZVtXT7E', 'now_showing', 8.7),
+('Dune: Part Two', 'Paul Atreides unites with Chani and the Fremen while seeking revenge against the conspirators who destroyed his family. An epic continuation of the desert saga.', 166, '2024-03-01', 'dune.jpg', 'https://www.youtube.com/embed/Way9Dexny3w', 'now_showing', 8.8),
+('Oppenheimer', 'The story of American scientist J. Robert Oppenheimer and his role in the development of the atomic bomb. A thrilling biographical epic.', 180, '2023-07-21', 'oppenheimer.jpg', 'https://www.youtube.com/embed/uYPbbksJxIg', 'now_showing', 8.5),
+('Avatar: The Way of Water', 'Jake Sully lives with his newfound family formed on the extrasolar moon Pandora. Once a familiar threat returns to finish what was previously started, Jake must work with Neytiri to protect their family.', 192, '2025-02-15', 'avatar.jpg', 'https://www.youtube.com/embed/d9MyW72ELq0', 'coming_soon', 8.1),
+('Barbie', 'Barbie and Ken are having the time of their lives in the colorful and seemingly perfect world of Barbie Land. However, when they get a chance to go to the real world, they discover the joys and perils of living among humans.', 114, '2025-03-20', 'barbie.jpg', 'https://www.youtube.com/embed/pBk4NYhWNMM', 'coming_soon', 7.2);
 
 -- Link movies to genres
 INSERT INTO movie_genres (movie_id, genre_id) VALUES 
-(1, 1), (1, 7),  -- Dark Knight: Action, Thriller
-(2, 5), (2, 10), -- Interstellar: Sci-Fi, Adventure
-(3, 2),          -- Comedy Club: Comedy
-(4, 4), (4, 7),  -- Haunted Mansion: Horror, Thriller
-(5, 5), (5, 1), (5, 10), -- Space Warriors: Sci-Fi, Action, Adventure
-(6, 6), (6, 3);  -- Love in Paris: Romance, Drama
+(1, 1), (1, 7), (1, 3),  -- The Dark Knight: Action, Thriller, Drama
+(2, 5), (2, 10), (2, 3), -- Interstellar: Sci-Fi, Adventure, Drama
+(3, 5), (3, 1), (3, 10), -- Dune: Sci-Fi, Action, Adventure
+(4, 3), (4, 7),          -- Oppenheimer: Drama, Thriller
+(5, 5), (5, 1), (5, 10), -- Avatar: Sci-Fi, Action, Adventure
+(6, 2), (6, 10), (6, 6); -- Barbie: Comedy, Adventure, Romance
 
 -- Insert sample showtimes (for the next 7 days)
 INSERT INTO showtimes (movie_id, theater_id, start_time, end_time, price) VALUES 
--- Dark Knight Returns showtimes
-(1, 1, DATE_ADD(CURDATE(), INTERVAL 10 HOUR), DATE_ADD(CURDATE(), INTERVAL 12 HOUR) + INTERVAL 45 MINUTE, 15.00),
-(1, 1, DATE_ADD(CURDATE(), INTERVAL 14 HOUR), DATE_ADD(CURDATE(), INTERVAL 16 HOUR) + INTERVAL 45 MINUTE, 15.00),
-(1, 1, DATE_ADD(CURDATE(), INTERVAL 19 HOUR), DATE_ADD(CURDATE(), INTERVAL 21 HOUR) + INTERVAL 45 MINUTE, 18.00),
-(1, 2, DATE_ADD(CURDATE(), INTERVAL 1 DAY) + INTERVAL 11 HOUR, DATE_ADD(CURDATE(), INTERVAL 1 DAY) + INTERVAL 13 HOUR + INTERVAL 45 MINUTE, 12.00),
+-- The Dark Knight showtimes
+(1, 1, DATE_ADD(CURDATE(), INTERVAL 10 HOUR), DATE_ADD(CURDATE(), INTERVAL 12 HOUR) + INTERVAL 32 MINUTE, 15.00),
+(1, 1, DATE_ADD(CURDATE(), INTERVAL 14 HOUR), DATE_ADD(CURDATE(), INTERVAL 16 HOUR) + INTERVAL 32 MINUTE, 15.00),
+(1, 1, DATE_ADD(CURDATE(), INTERVAL 19 HOUR), DATE_ADD(CURDATE(), INTERVAL 21 HOUR) + INTERVAL 32 MINUTE, 18.00),
+(1, 2, DATE_ADD(CURDATE(), INTERVAL 1 DAY) + INTERVAL 11 HOUR, DATE_ADD(CURDATE(), INTERVAL 1 DAY) + INTERVAL 13 HOUR + INTERVAL 32 MINUTE, 12.00),
 
--- Interstellar 2 showtimes
-(2, 1, DATE_ADD(CURDATE(), INTERVAL 13 HOUR), DATE_ADD(CURDATE(), INTERVAL 16 HOUR), 15.00),
-(2, 3, DATE_ADD(CURDATE(), INTERVAL 18 HOUR), DATE_ADD(CURDATE(), INTERVAL 21 HOUR), 20.00),
-(2, 4, DATE_ADD(CURDATE(), INTERVAL 1 DAY) + INTERVAL 20 HOUR, DATE_ADD(CURDATE(), INTERVAL 1 DAY) + INTERVAL 23 HOUR, 25.00),
+-- Interstellar showtimes
+(2, 1, DATE_ADD(CURDATE(), INTERVAL 13 HOUR), DATE_ADD(CURDATE(), INTERVAL 15 HOUR) + INTERVAL 49 MINUTE, 15.00),
+(2, 3, DATE_ADD(CURDATE(), INTERVAL 18 HOUR), DATE_ADD(CURDATE(), INTERVAL 20 HOUR) + INTERVAL 49 MINUTE, 20.00),
+(2, 4, DATE_ADD(CURDATE(), INTERVAL 1 DAY) + INTERVAL 20 HOUR, DATE_ADD(CURDATE(), INTERVAL 1 DAY) + INTERVAL 22 HOUR + INTERVAL 49 MINUTE, 25.00),
 
--- Comedy Club showtimes
-(3, 2, DATE_ADD(CURDATE(), INTERVAL 12 HOUR), DATE_ADD(CURDATE(), INTERVAL 14 HOUR), 10.00),
-(3, 2, DATE_ADD(CURDATE(), INTERVAL 17 HOUR), DATE_ADD(CURDATE(), INTERVAL 19 HOUR), 10.00),
-(3, 3, DATE_ADD(CURDATE(), INTERVAL 2 DAY) + INTERVAL 15 HOUR, DATE_ADD(CURDATE(), INTERVAL 2 DAY) + INTERVAL 17 HOUR, 12.00),
+-- Dune Part Two showtimes
+(3, 1, DATE_ADD(CURDATE(), INTERVAL 12 HOUR), DATE_ADD(CURDATE(), INTERVAL 14 HOUR) + INTERVAL 46 MINUTE, 18.00),
+(3, 2, DATE_ADD(CURDATE(), INTERVAL 17 HOUR), DATE_ADD(CURDATE(), INTERVAL 19 HOUR) + INTERVAL 46 MINUTE, 18.00),
+(3, 3, DATE_ADD(CURDATE(), INTERVAL 2 DAY) + INTERVAL 15 HOUR, DATE_ADD(CURDATE(), INTERVAL 2 DAY) + INTERVAL 17 HOUR + INTERVAL 46 MINUTE, 20.00),
 
--- Haunted Mansion showtimes
-(4, 2, DATE_ADD(CURDATE(), INTERVAL 21 HOUR), DATE_ADD(CURDATE(), INTERVAL 22 HOUR) + INTERVAL 50 MINUTE, 12.00),
-(4, 3, DATE_ADD(CURDATE(), INTERVAL 1 DAY) + INTERVAL 22 HOUR, DATE_ADD(CURDATE(), INTERVAL 1 DAY) + INTERVAL 23 HOUR + INTERVAL 50 MINUTE, 14.00);
+-- Oppenheimer showtimes
+(4, 2, DATE_ADD(CURDATE(), INTERVAL 21 HOUR), DATE_ADD(CURDATE(), INTERVAL 24 HOUR), 16.00),
+(4, 3, DATE_ADD(CURDATE(), INTERVAL 1 DAY) + INTERVAL 22 HOUR, DATE_ADD(CURDATE(), INTERVAL 2 DAY) + INTERVAL 1 HOUR, 18.00);
 
 -- ============================================
 -- VIEWS (Optional - For easier queries)

@@ -114,20 +114,20 @@ include INCLUDES_PATH . 'header.php';
         <!-- Sidebar -->
         <div class="col-lg-3 mb-4">
             <div class="card bg-dark border-secondary">
-                <div class="card-body text-center">
+                <div class="card-body text-light text-center">
                     <img src="<?php echo UPLOADS_URL; ?>/profiles/<?php echo $user['profile_photo'] ?? 'default.png'; ?>" 
                          class="rounded-circle mb-3" width="120" height="120"
                          alt="Profile Photo"
                          onerror="this.src='<?php echo ASSETS_URL; ?>/images/default-avatar.png'"
                          style="object-fit: cover;">
                     <h5 class="mb-1"><?php echo htmlspecialchars($user['name']); ?></h5>
-                    <p class="text-muted small mb-3"><?php echo htmlspecialchars($user['email']); ?></p>
+                    <p class="text-light small mb-3"><?php echo htmlspecialchars($user['email']); ?></p>
                     <span class="badge bg-<?php echo $user['role'] === 'admin' ? 'danger' : 'secondary'; ?>">
                         <?php echo ucfirst($user['role']); ?>
                     </span>
                 </div>
                 <div class="card-footer bg-transparent border-secondary">
-                    <small class="text-muted">
+                    <small class="text-light">
                         Member since <?php echo formatDate($user['created_at']); ?>
                     </small>
                 </div>
@@ -135,8 +135,8 @@ include INCLUDES_PATH . 'header.php';
             
             <!-- Quick Stats -->
             <div class="card bg-dark border-secondary mt-3">
-                <div class="card-body">
-                    <h6 class="text-muted mb-3">Quick Stats</h6>
+                <div class="card-body text-light">
+                    <h6 class="text-light mb-3">Quick Stats</h6>
                     <div class="d-flex justify-content-between mb-2">
                         <span>Total Bookings</span>
                         <span class="fw-bold"><?php echo $totalBookings; ?></span>
@@ -187,29 +187,29 @@ include INCLUDES_PATH . 'header.php';
                         <i class="bi bi-person me-2"></i>Profile Information
                     </h5>
                 </div>
-                <div class="card-body">
+                <div class="card-body text-light">
                     <form method="POST" action="" enctype="multipart/form-data">
                         <input type="hidden" name="csrf_token" value="<?php echo $csrfToken; ?>">
                         <input type="hidden" name="action" value="update_profile">
                         
                         <div class="row g-3">
                             <div class="col-md-6">
-                                <label for="name" class="form-label">Full Name</label>
+                                <label for="name" class="form-label text-light">Full Name</label>
                                 <input type="text" class="form-control bg-dark text-light border-secondary" 
                                        id="name" name="name" 
                                        value="<?php echo htmlspecialchars($user['name']); ?>" required>
                             </div>
                             <div class="col-md-6">
-                                <label for="email" class="form-label">Email Address</label>
+                                <label for="email" class="form-label text-light">Email Address</label>
                                 <input type="email" class="form-control bg-dark text-light border-secondary" 
                                        id="email" value="<?php echo htmlspecialchars($user['email']); ?>" disabled>
-                                <small class="text-muted">Email cannot be changed</small>
+                                <small class="text-light">Email cannot be changed</small>
                             </div>
                             <div class="col-12">
-                                <label for="profile_photo" class="form-label">Profile Photo</label>
+                                <label for="profile_photo" class="form-label text-light">Profile Photo</label>
                                 <input type="file" class="form-control bg-dark text-light border-secondary" 
                                        id="profile_photo" name="profile_photo" accept="image/*">
-                                <small class="text-muted">Max 5MB. JPG, PNG, or GIF</small>
+                                <small class="text-light">Max 5MB. JPG, PNG, or GIF</small>
                             </div>
                         </div>
                         
@@ -229,25 +229,25 @@ include INCLUDES_PATH . 'header.php';
                         <i class="bi bi-key me-2"></i>Change Password
                     </h5>
                 </div>
-                <div class="card-body">
+                <div class="card-body text-light">
                     <form method="POST" action="">
                         <input type="hidden" name="csrf_token" value="<?php echo $csrfToken; ?>">
                         <input type="hidden" name="action" value="change_password">
                         
                         <div class="row g-3">
                             <div class="col-md-12">
-                                <label for="current_password" class="form-label">Current Password</label>
+                                <label for="current_password" class="form-label text-light">Current Password</label>
                                 <input type="password" class="form-control bg-dark text-light border-secondary" 
                                        id="current_password" name="current_password" required>
                             </div>
                             <div class="col-md-6">
-                                <label for="new_password" class="form-label">New Password</label>
+                                <label for="new_password" class="form-label text-light">New Password</label>
                                 <input type="password" class="form-control bg-dark text-light border-secondary" 
                                        id="new_password" name="new_password" required>
-                                <small class="text-muted">Min 8 characters with uppercase, lowercase, and number</small>
+                                <small class="text-light">Min 8 characters with uppercase, lowercase, and number</small>
                             </div>
                             <div class="col-md-6">
-                                <label for="confirm_password" class="form-label">Confirm New Password</label>
+                                <label for="confirm_password" class="form-label text-light">Confirm New Password</label>
                                 <input type="password" class="form-control bg-dark text-light border-secondary" 
                                        id="confirm_password" name="confirm_password" required>
                             </div>

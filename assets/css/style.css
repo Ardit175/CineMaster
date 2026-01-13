@@ -13,8 +13,8 @@
     --cine-darker: #0d0d0d;
     --cine-card: #1e1e1e;
     --cine-border: #2d2d2d;
-    --cine-text: #e0e0e0;
-    --cine-muted: #9e9e9e;
+    --cine-text: #ffffff;
+    --cine-muted: #ffffff;
     --cine-gold: #ffc107;
     --cine-gradient: linear-gradient(135deg, #dc3545 0%, #fd7e14 100%);
 }
@@ -81,7 +81,7 @@ a:hover {
     transform: scale(1.05);
 }
 
-.movie-card .card-body {
+.movie-card .card-body text-light {
     padding: 1.25rem;
 }
 
@@ -171,7 +171,7 @@ a:hover {
 
 .seat.booked {
     background: var(--cine-secondary);
-    color: #999;
+    color: #ffffff;
     cursor: not-allowed;
 }
 
@@ -230,7 +230,7 @@ a:hover {
 }
 
 .form-control::placeholder {
-    color: var(--cine-muted);
+    color: #cccccc;
 }
 
 /* ===== Button Enhancements ===== */

@@ -156,7 +156,7 @@ include INCLUDES_PATH . 'header.php';
                         <?php foreach ($dayShowtimes as $showtime): ?>
                             <div class="col-lg-3 col-md-4 col-6">
                                 <div class="showtime-card card bg-dark border-secondary h-100">
-                                    <div class="card-body text-center">
+                                    <div class="card-body text-light text-center">
                                         <h5 class="text-danger mb-2">
                                             <?php echo date('h:i A', strtotime($showtime['start_time'])); ?>
                                         </h5>
@@ -167,7 +167,7 @@ include INCLUDES_PATH . 'header.php';
                                         <p class="text-success fw-bold mb-2">
                                             <?php echo formatPrice($showtime['price']); ?>
                                         </p>
-                                        <p class="small text-muted mb-3">
+                                        <p class="small text-light mb-3">
                                             <i class="bi bi-grid-3x3 me-1"></i>
                                             <?php echo $showtime['available_seats']; ?> seats available
                                         </p>
@@ -199,7 +199,7 @@ include INCLUDES_PATH . 'header.php';
     <div class="container">
         <i class="bi bi-calendar-event fs-1 text-warning mb-3 d-block"></i>
         <h3>Coming Soon!</h3>
-        <p class="text-muted">This movie will be released on <?php echo formatDate($movie['release_date']); ?></p>
+        <p class="text-light">This movie will be released on <?php echo formatDate($movie['release_date']); ?></p>
     </div>
 </section>
 <?php endif; ?>

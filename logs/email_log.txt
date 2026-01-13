@@ -1,0 +1,18 @@
+
+========================================
+Date: 2026-01-13 05:22:54
+To: ardit.palushi@fti.edu.al
+Subject: Verify your CineMaster account
+Body:
+Hello Ardit Palushi,
+
+Thank you for registering at CineMaster!
+
+Please click the link below to verify your email:
+http://localhost:8888/verify.php?token=af3faf47cd89ec807558469895153eb510beee1d62662cd88f944c4173944c18
+
+This link will expire in 24 hours.
+
+Best regards,
+CineMaster Team
+========================================

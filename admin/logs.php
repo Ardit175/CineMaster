@@ -144,33 +144,33 @@ include INCLUDES_PATH . 'header.php';
             <div class="row g-3 mb-4">
                 <div class="col-md-3">
                     <div class="card bg-dark border-secondary">
-                        <div class="card-body text-center">
+                        <div class="card-body text-light text-center">
                             <h4 class="text-danger"><?php echo number_format($stats['total']); ?></h4>
-                            <small class="text-muted">Logs (7 days)</small>
+                            <small class="text-light">Logs (7 days)</small>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="card bg-dark border-secondary">
-                        <div class="card-body text-center">
+                        <div class="card-body text-light text-center">
                             <h4 class="text-info"><?php echo $stats['unique_users']; ?></h4>
-                            <small class="text-muted">Active Users</small>
+                            <small class="text-light">Active Users</small>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="card bg-dark border-secondary">
-                        <div class="card-body text-center">
+                        <div class="card-body text-light text-center">
                             <h4 class="text-warning"><?php echo $stats['unique_ips']; ?></h4>
-                            <small class="text-muted">Unique IPs</small>
+                            <small class="text-light">Unique IPs</small>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="card bg-dark border-secondary">
-                        <div class="card-body text-center">
+                        <div class="card-body text-light text-center">
                             <h4 class="text-success"><?php echo $stats['categories']; ?></h4>
-                            <small class="text-muted">Categories</small>
+                            <small class="text-light">Categories</small>
                         </div>
                     </div>
                 </div>
@@ -178,17 +178,17 @@ include INCLUDES_PATH . 'header.php';
             
             <!-- Filters -->
             <div class="card bg-dark border-secondary mb-4">
-                <div class="card-body">
+                <div class="card-body text-light">
                     <form method="GET" class="row g-3">
                         <div class="col-md-2">
-                            <label class="form-label">Search</label>
+                            <label class="form-label text-light">Search</label>
                             <input type="text" name="search" 
                                    class="form-control bg-dark text-light border-secondary"
                                    placeholder="Action, IP..."
                                    value="<?php echo htmlspecialchars($filterSearch); ?>">
                         </div>
                         <div class="col-md-2">
-                            <label class="form-label">Category</label>
+                            <label class="form-label text-light">Category</label>
                             <select name="category" class="form-select bg-dark text-light border-secondary">
                                 <option value="">All Categories</option>
                                 <?php foreach ($categories as $cat): ?>
@@ -200,7 +200,7 @@ include INCLUDES_PATH . 'header.php';
                             </select>
                         </div>
                         <div class="col-md-3">
-                            <label class="form-label">User</label>
+                            <label class="form-label text-light">User</label>
                             <select name="user" class="form-select bg-dark text-light border-secondary">
                                 <option value="">All Users</option>
                                 <?php foreach ($users as $user): ?>
@@ -212,7 +212,7 @@ include INCLUDES_PATH . 'header.php';
                             </select>
                         </div>
                         <div class="col-md-2">
-                            <label class="form-label">Date</label>
+                            <label class="form-label text-light">Date</label>
                             <input type="date" name="date" 
                                    class="form-control bg-dark text-light border-secondary"
                                    value="<?php echo htmlspecialchars($filterDate); ?>">
@@ -232,7 +232,7 @@ include INCLUDES_PATH . 'header.php';
                 <div class="card-header bg-secondary">
                     <span class="badge bg-primary me-2"><?php echo count($logs); ?></span> log entries
                 </div>
-                <div class="card-body p-0">
+                <div class="card-body text-light p-0">
                     <div class="table-responsive">
                         <table class="table table-dark table-hover table-sm mb-0">
                             <thead class="table-secondary">
@@ -247,7 +247,7 @@ include INCLUDES_PATH . 'header.php';
                             <tbody>
                                 <?php if (empty($logs)): ?>
                                     <tr>
-                                        <td colspan="5" class="text-center py-4 text-muted">
+                                        <td colspan="5" class="text-center py-4 text-light">
                                             No logs found.
                                         </td>
                                     </tr>
@@ -261,7 +261,7 @@ include INCLUDES_PATH . 'header.php';
                                                 <?php if ($log['user_name']): ?>
                                                     <span class="text-info"><?php echo htmlspecialchars($log['user_name']); ?></span>
                                                 <?php else: ?>
-                                                    <span class="text-muted">Guest</span>
+                                                    <span class="text-light">Guest</span>
                                                 <?php endif; ?>
                                             </td>
                                             <td>
@@ -310,9 +310,9 @@ include INCLUDES_PATH . 'header.php';
                 <input type="hidden" name="csrf_token" value="<?php echo $csrfToken; ?>">
                 <input type="hidden" name="clear_logs" value="1">
                 <div class="modal-body">
-                    <p class="text-muted">This will permanently delete old log entries.</p>
+                    <p class="text-light">This will permanently delete old log entries.</p>
                     <div class="mb-3">
-                        <label class="form-label">Delete logs older than:</label>
+                        <label class="form-label text-light">Delete logs older than:</label>
                         <select name="older_than" class="form-select bg-dark text-light border-secondary">
                             <option value="7">7 days</option>
                             <option value="14">14 days</option>

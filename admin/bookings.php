@@ -189,7 +189,7 @@ include INCLUDES_PATH . 'header.php';
             <div class="row g-3 mb-4">
                 <div class="col-md-3">
                     <div class="card bg-primary text-white">
-                        <div class="card-body">
+                        <div class="card-body text-light">
                             <h4><?php echo $stats['total']; ?></h4>
                             <small>Total Bookings</small>
                         </div>
@@ -197,7 +197,7 @@ include INCLUDES_PATH . 'header.php';
                 </div>
                 <div class="col-md-3">
                     <div class="card bg-success text-white">
-                        <div class="card-body">
+                        <div class="card-body text-light">
                             <h4><?php echo $stats['confirmed']; ?></h4>
                             <small>Confirmed</small>
                         </div>
@@ -205,7 +205,7 @@ include INCLUDES_PATH . 'header.php';
                 </div>
                 <div class="col-md-3">
                     <div class="card bg-warning text-dark">
-                        <div class="card-body">
+                        <div class="card-body text-light">
                             <h4><?php echo $stats['pending']; ?></h4>
                             <small>Pending</small>
                         </div>
@@ -213,7 +213,7 @@ include INCLUDES_PATH . 'header.php';
                 </div>
                 <div class="col-md-3">
                     <div class="card bg-danger text-white">
-                        <div class="card-body">
+                        <div class="card-body text-light">
                             <h4>$<?php echo number_format($stats['total_revenue'], 2); ?></h4>
                             <small>Total Revenue</small>
                         </div>
@@ -223,17 +223,17 @@ include INCLUDES_PATH . 'header.php';
             
             <!-- Filters -->
             <div class="card bg-dark border-secondary mb-4">
-                <div class="card-body">
+                <div class="card-body text-light">
                     <form method="GET" class="row g-3">
                         <div class="col-md-3">
-                            <label class="form-label">Search</label>
+                            <label class="form-label text-light">Search</label>
                             <input type="text" name="search" 
                                    class="form-control bg-dark text-light border-secondary"
                                    placeholder="Booking #, Name, Email..."
                                    value="<?php echo htmlspecialchars($filterSearch); ?>">
                         </div>
                         <div class="col-md-3">
-                            <label class="form-label">Status</label>
+                            <label class="form-label text-light">Status</label>
                             <select name="status" class="form-select bg-dark text-light border-secondary">
                                 <option value="">All Statuses</option>
                                 <option value="confirmed" <?php echo $filterStatus === 'confirmed' ? 'selected' : ''; ?>>Confirmed</option>
@@ -242,7 +242,7 @@ include INCLUDES_PATH . 'header.php';
                             </select>
                         </div>
                         <div class="col-md-3">
-                            <label class="form-label">Booking Date</label>
+                            <label class="form-label text-light">Booking Date</label>
                             <input type="date" name="date" 
                                    class="form-control bg-dark text-light border-secondary"
                                    value="<?php echo htmlspecialchars($filterDate); ?>">
@@ -259,7 +259,7 @@ include INCLUDES_PATH . 'header.php';
             
             <!-- Bookings Table -->
             <div class="card bg-dark border-secondary">
-                <div class="card-body p-0">
+                <div class="card-body text-light p-0">
                     <div class="table-responsive">
                         <table class="table table-dark table-hover mb-0">
                             <thead class="table-secondary">
@@ -277,7 +277,7 @@ include INCLUDES_PATH . 'header.php';
                             <tbody>
                                 <?php if (empty($bookings)): ?>
                                     <tr>
-                                        <td colspan="8" class="text-center py-4 text-muted">
+                                        <td colspan="8" class="text-center py-4 text-light">
                                             No bookings found.
                                         </td>
                                     </tr>
@@ -286,15 +286,15 @@ include INCLUDES_PATH . 'header.php';
                                         <tr>
                                             <td>
                                                 <strong class="text-danger"><?php echo $booking['booking_number']; ?></strong>
-                                                <br><small class="text-muted"><?php echo formatDate($booking['created_at'], 'M j, g:i A'); ?></small>
+                                                <br><small class="text-light"><?php echo formatDate($booking['created_at'], 'M j, g:i A'); ?></small>
                                             </td>
                                             <td>
                                                 <?php echo htmlspecialchars($booking['user_name']); ?>
-                                                <br><small class="text-muted"><?php echo htmlspecialchars($booking['user_email']); ?></small>
+                                                <br><small class="text-light"><?php echo htmlspecialchars($booking['user_email']); ?></small>
                                             </td>
                                             <td>
                                                 <?php echo htmlspecialchars($booking['movie_title']); ?>
-                                                <br><small class="text-muted"><?php echo htmlspecialchars($booking['theater_name']); ?></small>
+                                                <br><small class="text-light"><?php echo htmlspecialchars($booking['theater_name']); ?></small>
                                             </td>
                                             <td>
                                                 <?php echo formatDate($booking['show_date']); ?>
@@ -352,39 +352,39 @@ include INCLUDES_PATH . 'header.php';
                                                     <div class="modal-body">
                                                         <div class="row g-3">
                                                             <div class="col-6">
-                                                                <small class="text-muted">Customer</small>
+                                                                <small class="text-light">Customer</small>
                                                                 <p class="mb-0"><?php echo htmlspecialchars($booking['user_name']); ?></p>
                                                             </div>
                                                             <div class="col-6">
-                                                                <small class="text-muted">Email</small>
+                                                                <small class="text-light">Email</small>
                                                                 <p class="mb-0"><?php echo htmlspecialchars($booking['user_email']); ?></p>
                                                             </div>
                                                             <div class="col-6">
-                                                                <small class="text-muted">Movie</small>
+                                                                <small class="text-light">Movie</small>
                                                                 <p class="mb-0"><?php echo htmlspecialchars($booking['movie_title']); ?></p>
                                                             </div>
                                                             <div class="col-6">
-                                                                <small class="text-muted">Theater</small>
+                                                                <small class="text-light">Theater</small>
                                                                 <p class="mb-0"><?php echo htmlspecialchars($booking['theater_name']); ?></p>
                                                             </div>
                                                             <div class="col-6">
-                                                                <small class="text-muted">Show Date</small>
+                                                                <small class="text-light">Show Date</small>
                                                                 <p class="mb-0"><?php echo formatDate($booking['show_date']); ?></p>
                                                             </div>
                                                             <div class="col-6">
-                                                                <small class="text-muted">Show Time</small>
+                                                                <small class="text-light">Show Time</small>
                                                                 <p class="mb-0"><?php echo date('g:i A', strtotime($booking['show_time'])); ?></p>
                                                             </div>
                                                             <div class="col-6">
-                                                                <small class="text-muted">Seats</small>
+                                                                <small class="text-light">Seats</small>
                                                                 <p class="mb-0"><?php echo $booking['seats_booked']; ?> seat(s)</p>
                                                             </div>
                                                             <div class="col-6">
-                                                                <small class="text-muted">Total Amount</small>
+                                                                <small class="text-light">Total Amount</small>
                                                                 <p class="mb-0 text-success">$<?php echo number_format($booking['total_amount'], 2); ?></p>
                                                             </div>
                                                             <div class="col-6">
-                                                                <small class="text-muted">Status</small>
+                                                                <small class="text-light">Status</small>
                                                                 <p class="mb-0">
                                                                     <?php
                                                                     $statusClass = [
@@ -399,7 +399,7 @@ include INCLUDES_PATH . 'header.php';
                                                                 </p>
                                                             </div>
                                                             <div class="col-6">
-                                                                <small class="text-muted">Booked On</small>
+                                                                <small class="text-light">Booked On</small>
                                                                 <p class="mb-0"><?php echo formatDate($booking['created_at'], 'M j, Y g:i A'); ?></p>
                                                             </div>
                                                         </div>

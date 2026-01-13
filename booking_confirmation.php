@@ -58,7 +58,7 @@ include INCLUDES_PATH . 'header.php';
                     <i class="bi bi-check-circle-fill text-success" style="font-size: 80px;"></i>
                 </div>
                 <h1 class="text-success fw-bold">Booking Confirmed!</h1>
-                <p class="lead text-muted">Thank you for your purchase. Your tickets have been booked successfully.</p>
+                <p class="lead text-light">Thank you for your purchase. Your tickets have been booked successfully.</p>
             </div>
             
             <!-- Ticket Card -->
@@ -89,33 +89,33 @@ include INCLUDES_PATH . 'header.php';
                         <div class="col-md-9">
                             <div class="row g-3">
                                 <div class="col-6">
-                                    <small class="text-muted d-block">Date & Time</small>
+                                    <small class="text-light d-block">Date & Time</small>
                                     <strong><?php echo formatDateTime($booking['start_time']); ?></strong>
                                 </div>
                                 <div class="col-6">
-                                    <small class="text-muted d-block">Theater</small>
+                                    <small class="text-light d-block">Theater</small>
                                     <strong><?php echo htmlspecialchars($booking['theater_name']); ?></strong>
                                 </div>
                                 <div class="col-6">
-                                    <small class="text-muted d-block">Seats</small>
+                                    <small class="text-light d-block">Seats</small>
                                     <strong class="text-danger">
                                         <?php 
                                         $seatArray = explode(', ', $booking['seats']);
                                         echo implode(', ', $seatArray); 
                                         ?> 
-                                        <span class="text-muted">(<?php echo count($seatArray); ?> ticket<?php echo count($seatArray) > 1 ? 's' : ''; ?>)</span>
+                                        <span class="text-light">(<?php echo count($seatArray); ?> ticket<?php echo count($seatArray) > 1 ? 's' : ''; ?>)</span>
                                     </strong>
                                 </div>
                                 <div class="col-6">
-                                    <small class="text-muted d-block">Duration</small>
+                                    <small class="text-light d-block">Duration</small>
                                     <strong><?php echo $booking['duration']; ?> minutes</strong>
                                 </div>
                                 <div class="col-6">
-                                    <small class="text-muted d-block">Booking Date</small>
+                                    <small class="text-light d-block">Booking Date</small>
                                     <strong><?php echo formatDateTime($booking['booking_date']); ?></strong>
                                 </div>
                                 <div class="col-6">
-                                    <small class="text-muted d-block">Total Paid</small>
+                                    <small class="text-light d-block">Total Paid</small>
                                     <strong class="text-success fs-5"><?php echo formatPrice($booking['total_amount']); ?></strong>
                                 </div>
                             </div>
@@ -128,18 +128,18 @@ include INCLUDES_PATH . 'header.php';
                     <!-- Customer & Payment Info -->
                     <div class="row g-3">
                         <div class="col-md-6">
-                            <small class="text-muted d-block">Customer</small>
+                            <small class="text-light d-block">Customer</small>
                             <strong><?php echo htmlspecialchars($booking['user_name']); ?></strong>
-                            <br><small class="text-muted"><?php echo htmlspecialchars($booking['user_email']); ?></small>
+                            <br><small class="text-light"><?php echo htmlspecialchars($booking['user_email']); ?></small>
                         </div>
                         <div class="col-md-6 text-md-end">
-                            <small class="text-muted d-block">Payment Status</small>
+                            <small class="text-light d-block">Payment Status</small>
                             <span class="badge bg-success fs-6">
                                 <i class="bi bi-check-circle me-1"></i>
                                 <?php echo ucfirst($booking['payment_status']); ?>
                             </span>
                             <?php if ($booking['stripe_payment_id']): ?>
-                                <br><small class="text-muted">Ref: <?php echo htmlspecialchars($booking['stripe_payment_id']); ?></small>
+                                <br><small class="text-light">Ref: <?php echo htmlspecialchars($booking['stripe_payment_id']); ?></small>
                             <?php endif; ?>
                         </div>
                     </div>
@@ -147,20 +147,17 @@ include INCLUDES_PATH . 'header.php';
                 
                 <!-- QR Code Section -->
                 <div class="ticket-footer bg-black p-4 text-center">
-                    <div class="qr-placeholder bg-white d-inline-block p-3 rounded mb-2">
-                        <!-- QR Code would go here - using placeholder -->
-                        <svg width="120" height="120" viewBox="0 0 120 120">
-                            <rect fill="#fff" width="120" height="120"/>
-                            <text x="60" y="60" text-anchor="middle" dominant-baseline="middle" font-size="10" fill="#000">
-                                QR Code
-                            </text>
-                            <text x="60" y="75" text-anchor="middle" dominant-baseline="middle" font-size="8" fill="#666">
-                                <?php echo $booking['booking_reference']; ?>
-                            </text>
-                        </svg>
+                    <div class="d-inline-block mb-3">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=<?php echo urlencode($booking['booking_reference']); ?>" 
+                             alt="QR Code" 
+                             class="bg-white p-2 rounded"
+                             style="display: block;">
                     </div>
-                    <p class="text-muted small mb-0">
-                        Show this QR code at the cinema entrance
+                    <div class="mb-2">
+                        <span class="badge bg-light text-dark fs-6 px-3 py-2"><?php echo $booking['booking_reference']; ?></span>
+                    </div>
+                    <p class="text-light small mb-0">
+                        <i class="bi bi-qr-code me-2"></i>Show this QR code at the cinema entrance
                     </p>
                 </div>
             </div>
@@ -180,11 +177,11 @@ include INCLUDES_PATH . 'header.php';
             
             <!-- Important Info -->
             <div class="card bg-dark border-secondary">
-                <div class="card-body">
+                <div class="card-body text-light">
                     <h5 class="card-title">
                         <i class="bi bi-info-circle text-info me-2"></i>Important Information
                     </h5>
-                    <ul class="text-muted small mb-0">
+                    <ul class="text-light small mb-0">
                         <li>Please arrive at least 15 minutes before the showtime.</li>
                         <li>Show your e-ticket (printed or on mobile) at the entrance.</li>
                         <li>Outside food and beverages are not allowed.</li>
@@ -212,7 +209,7 @@ include INCLUDES_PATH . 'header.php';
         box-shadow: none !important;
         border: 2px solid #000 !important;
     }
-    .text-muted {
+    .text-light {
         color: #666 !important;
     }
 }

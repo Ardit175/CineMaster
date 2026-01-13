@@ -39,11 +39,11 @@ include INCLUDES_PATH . 'header.php';
                             <div class="row h-100 align-items-center">
                                 <div class="col-lg-6">
                                     <span class="badge bg-danger mb-3">NOW SHOWING</span>
-                                    <h1 class="display-4 fw-bold mb-3"><?php echo htmlspecialchars($movie['title']); ?></h1>
-                                    <p class="lead mb-3 text-muted">
+                                    <h1 class="display-4 fw-bold mb-3 text-white"><?php echo htmlspecialchars($movie['title']); ?></h1>
+                                    <p class="lead mb-3 text-light opacity-75">
                                         <?php echo htmlspecialchars(substr($movie['description'], 0, 150)); ?>...
                                     </p>
-                                    <div class="mb-4">
+                                    <div class="mb-4 text-light">
                                         <span class="me-3"><i class="bi bi-clock me-1"></i> <?php echo $movie['duration']; ?> min</span>
                                         <span class="me-3"><i class="bi bi-star-fill text-warning me-1"></i> <?php echo $movie['rating']; ?>/10</span>
                                         <span><i class="bi bi-tags me-1"></i> <?php echo $movie['genres'] ?? 'N/A'; ?></span>
@@ -111,7 +111,7 @@ include INCLUDES_PATH . 'header.php';
                 <h2 class="fw-bold">
                     <i class="bi bi-film text-danger me-2"></i>Now Showing
                 </h2>
-                <p class="text-muted mb-0">Currently playing in our theaters</p>
+                <p class="text-light mb-0">Currently playing in our theaters</p>
             </div>
             <a href="<?php echo SITE_URL; ?>/movies.php?status=now_showing" class="btn btn-outline-danger">
                 View All <i class="bi bi-arrow-right ms-1"></i>
@@ -142,7 +142,7 @@ include INCLUDES_PATH . 'header.php';
                                     <?php echo htmlspecialchars($movie['title']); ?>
                                 </a>
                             </h6>
-                            <small class="text-muted">
+                            <small class="text-light">
                                 <i class="bi bi-clock me-1"></i><?php echo $movie['duration']; ?> min
                             </small>
                         </div>
@@ -161,7 +161,7 @@ include INCLUDES_PATH . 'header.php';
                 <h2 class="fw-bold">
                     <i class="bi bi-calendar-event text-danger me-2"></i>Coming Soon
                 </h2>
-                <p class="text-muted mb-0">Upcoming releases you won't want to miss</p>
+                <p class="text-light mb-0">Upcoming releases you won't want to miss</p>
             </div>
             <a href="<?php echo SITE_URL; ?>/movies.php?status=coming_soon" class="btn btn-outline-danger">
                 View All <i class="bi bi-arrow-right ms-1"></i>
@@ -180,9 +180,9 @@ include INCLUDES_PATH . 'header.php';
                                      onerror="this.src='<?php echo ASSETS_URL; ?>/images/default-poster.jpg'">
                             </div>
                             <div class="col-8">
-                                <div class="card-body">
-                                    <h6 class="card-title"><?php echo htmlspecialchars($movie['title']); ?></h6>
-                                    <p class="card-text text-muted small">
+                                <div class="card-body text-light">
+                                    <h6 class="card-title text-light"><?php echo htmlspecialchars($movie['title']); ?></h6>
+                                    <p class="card-text text-light small">
                                         <?php echo htmlspecialchars(substr($movie['description'], 0, 60)); ?>...
                                     </p>
                                     <div class="text-danger small mb-2">
@@ -207,29 +207,29 @@ include INCLUDES_PATH . 'header.php';
             <div class="col-lg-3 col-md-6">
                 <div class="feature-box p-4">
                     <i class="bi bi-ticket-perforated-fill fs-1 text-danger mb-3 d-block"></i>
-                    <h5>Easy Booking</h5>
-                    <p class="text-muted mb-0">Book your tickets in just a few clicks</p>
+                    <h5 class="text-light">Easy Booking</h5>
+                    <p class="text-light mb-0">Book your tickets in just a few clicks</p>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6">
                 <div class="feature-box p-4">
                     <i class="bi bi-credit-card fs-1 text-danger mb-3 d-block"></i>
-                    <h5>Secure Payments</h5>
-                    <p class="text-muted mb-0">Safe and secure payment with Stripe</p>
+                    <h5 class="text-light">Secure Payments</h5>
+                    <p class="text-light mb-0">Safe and secure payment with Stripe</p>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6">
                 <div class="feature-box p-4">
                     <i class="bi bi-grid-3x3-gap fs-1 text-danger mb-3 d-block"></i>
-                    <h5>Choose Your Seats</h5>
-                    <p class="text-muted mb-0">Select your preferred seats</p>
+                    <h5 class="text-light">Choose Your Seats</h5>
+                    <p class="text-light mb-0">Select your preferred seats</p>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6">
                 <div class="feature-box p-4">
                     <i class="bi bi-phone fs-1 text-danger mb-3 d-block"></i>
-                    <h5>E-Tickets</h5>
-                    <p class="text-muted mb-0">Get tickets delivered to your email</p>
+                    <h5 class="text-light">E-Tickets</h5>
+                    <p class="text-light mb-0">Get tickets delivered to your email</p>
                 </div>
             </div>
         </div>

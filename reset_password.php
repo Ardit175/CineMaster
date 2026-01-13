@@ -82,7 +82,7 @@ include INCLUDES_PATH . 'header.php';
                     </h3>
                 </div>
                 
-                <div class="card-body p-4">
+                <div class="card-body text-light p-4">
                     <?php if (!empty($errors)): ?>
                         <div class="alert alert-danger">
                             <ul class="mb-0">
@@ -109,16 +109,16 @@ include INCLUDES_PATH . 'header.php';
                         <input type="hidden" name="csrf_token" value="<?php echo $csrfToken; ?>">
                         
                         <div class="mb-3">
-                            <label for="password" class="form-label">New Password</label>
+                            <label for="password" class="form-label text-light">New Password</label>
                             <input type="password" class="form-control bg-dark text-light border-secondary" 
                                    id="password" name="password" required>
-                            <div class="form-text text-muted">
+                            <div class="form-text text-light">
                                 Min 8 characters, with uppercase, lowercase, and number.
                             </div>
                         </div>
                         
                         <div class="mb-4">
-                            <label for="confirm_password" class="form-label">Confirm Password</label>
+                            <label for="confirm_password" class="form-label text-light">Confirm Password</label>
                             <input type="password" class="form-control bg-dark text-light border-secondary" 
                                    id="confirm_password" name="confirm_password" required>
                         </div>

@@ -82,7 +82,7 @@ include INCLUDES_PATH . 'header.php';
                     </h3>
                 </div>
                 
-                <div class="card-body p-4">
+                <div class="card-body text-light p-4">
                     <!-- Display Errors -->
                     <?php if (!empty($errors)): ?>
                         <div class="alert alert-danger alert-dismissible fade show">
@@ -114,7 +114,7 @@ include INCLUDES_PATH . 'header.php';
                         
                         <!-- Email Field -->
                         <div class="mb-3">
-                            <label for="email" class="form-label">
+                            <label for="email" class="form-label text-light">
                                 <i class="bi bi-envelope me-1"></i>Email Address
                             </label>
                             <input type="email" class="form-control bg-dark text-light border-secondary" 
@@ -126,7 +126,7 @@ include INCLUDES_PATH . 'header.php';
                         
                         <!-- Password Field -->
                         <div class="mb-3">
-                            <label for="password" class="form-label">
+                            <label for="password" class="form-label text-light">
                                 <i class="bi bi-lock me-1"></i>Password
                             </label>
                             <div class="input-group">
@@ -144,7 +144,7 @@ include INCLUDES_PATH . 'header.php';
                         <div class="mb-4 d-flex justify-content-between align-items-center">
                             <div class="form-check">
                                 <input type="checkbox" class="form-check-input" id="remember" name="remember">
-                                <label class="form-check-label text-muted" for="remember">
+                                <label class="form-check-label text-light" for="remember">
                                     Remember me
                                 </label>
                             </div>
@@ -167,13 +167,13 @@ include INCLUDES_PATH . 'header.php';
                     <div class="alert alert-secondary mt-4 mb-0">
                         <small>
                             <strong>Demo Admin:</strong> admin@cinemaster.com / Admin@123<br>
-                            <em class="text-muted">Note: Default password is "password" but needs to match the hash</em>
+                            <em class="text-light">Note: Default password is "password" but needs to match the hash</em>
                         </small>
                     </div>
                     
                     <!-- Register Link -->
                     <div class="text-center mt-4">
-                        <p class="text-muted mb-0">
+                        <p class="text-light mb-0">
                             Don't have an account? 
                             <a href="<?php echo SITE_URL; ?>/register.php" class="text-danger text-decoration-none fw-bold">
                                 Register now
@@ -185,7 +185,7 @@ include INCLUDES_PATH . 'header.php';
             
             <!-- Security Info -->
             <div class="text-center mt-3">
-                <small class="text-muted">
+                <small class="text-light">
                     <i class="bi bi-shield-lock me-1"></i>
                     Your session will timeout after 15 minutes of inactivity.<br>
                     After 7 failed attempts, your IP will be blocked for 30 minutes.

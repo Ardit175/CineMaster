@@ -125,7 +125,7 @@ include INCLUDES_PATH . 'header.php';
             
             <!-- Users Table -->
             <div class="card bg-dark border-secondary">
-                <div class="card-body p-0">
+                <div class="card-body text-light p-0">
                     <div class="table-responsive">
                         <table class="table table-dark table-hover mb-0">
                             <thead class="table-secondary">
@@ -190,7 +190,7 @@ include INCLUDES_PATH . 'header.php';
                                                     </button>
                                                 </form>
                                             <?php else: ?>
-                                                <span class="text-muted">-</span>
+                                                <span class="text-light">-</span>
                                             <?php endif; ?>
                                         </td>
                                     </tr>

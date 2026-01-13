@@ -76,13 +76,13 @@ include INCLUDES_PATH . 'header.php';
                         <i class="bi bi-grid-3x3-gap me-2"></i>Select Your Seats
                     </h5>
                 </div>
-                <div class="card-body">
+                <div class="card-body text-light">
                     <!-- Screen Indicator -->
                     <div class="screen-indicator text-center mb-4">
                         <div class="screen bg-light text-dark py-2 rounded mx-auto" style="max-width: 80%;">
                             <i class="bi bi-display me-2"></i>SCREEN
                         </div>
-                        <small class="text-muted">All eyes this way please!</small>
+                        <small class="text-light">All eyes this way please!</small>
                     </div>
                     
                     <!-- Seat Legend -->
@@ -121,7 +121,7 @@ include INCLUDES_PATH . 'header.php';
                         <?php endforeach; ?>
                     </div>
                     
-                    <p class="text-center text-muted mt-4 small">
+                    <p class="text-center text-light mt-4 small">
                         <i class="bi bi-info-circle me-1"></i>
                         Click on available seats to select them. Maximum 10 seats per booking.
                     </p>
@@ -141,7 +141,7 @@ include INCLUDES_PATH . 'header.php';
                              onerror="this.src='<?php echo ASSETS_URL; ?>/images/default-poster.jpg'">
                     </div>
                     <div class="col-8">
-                        <div class="card-body">
+                        <div class="card-body text-light">
                             <h5 class="card-title text-danger"><?php echo htmlspecialchars($showtime['movie_title']); ?></h5>
                             <p class="card-text small mb-1">
                                 <i class="bi bi-calendar me-1"></i>
@@ -167,7 +167,7 @@ include INCLUDES_PATH . 'header.php';
                         <i class="bi bi-receipt me-2"></i>Booking Summary
                     </h5>
                 </div>
-                <div class="card-body">
+                <div class="card-body text-light">
                     <form id="bookingForm" action="<?php echo SITE_URL; ?>/checkout.php" method="POST">
                         <input type="hidden" name="csrf_token" value="<?php echo $csrfToken; ?>">
                         <input type="hidden" name="showtime_id" value="<?php echo $showtimeId; ?>">
@@ -175,9 +175,9 @@ include INCLUDES_PATH . 'header.php';
                         <input type="hidden" name="total" id="totalAmountInput" value="">
                         
                         <div class="mb-3">
-                            <label class="form-label text-muted small">Selected Seats</label>
+                            <label class="form-label text-light text-light small">Selected Seats</label>
                             <div id="selectedSeatsList" class="fw-bold text-light">
-                                <span class="text-muted">No seats selected</span>
+                                <span class="text-light">No seats selected</span>
                             </div>
                         </div>
                         
@@ -195,7 +195,7 @@ include INCLUDES_PATH . 'header.php';
                             <span>Subtotal:</span>
                             <span id="subtotal">$0.00</span>
                         </div>
-                        <div class="d-flex justify-content-between mb-2 text-muted small">
+                        <div class="d-flex justify-content-between mb-2 text-light small">
                             <span>Booking Fee:</span>
                             <span>$1.50</span>
                         </div>
@@ -214,7 +214,7 @@ include INCLUDES_PATH . 'header.php';
                         </div>
                     </form>
                     
-                    <p class="text-muted small mt-3 mb-0 text-center">
+                    <p class="text-light small mt-3 mb-0 text-center">
                         <i class="bi bi-shield-check me-1"></i>Secure payment powered by Stripe
                     </p>
                 </div>
@@ -352,7 +352,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 '<span class="badge bg-danger me-1 mb-1">' + s + '</span>'
             ).join('');
         } else {
-            seatsList.innerHTML = '<span class="text-muted">No seats selected</span>';
+            seatsList.innerHTML = '<span class="text-light">No seats selected</span>';
         }
         
         // Update form inputs
