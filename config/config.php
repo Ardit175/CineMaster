@@ -90,10 +90,6 @@ define('MAIL_USERNAME', 'your-email@gmail.com');
 define('MAIL_PASSWORD', 'your-app-password');
 define('MAIL_FROM_NAME', 'CineMaster');
 
-// For demo purposes, we'll simulate emails by logging to a file
-define('EMAIL_SIMULATION', true);        // Set to false in production with real SMTP
-define('EMAIL_LOG_FILE', ROOT_PATH . 'logs/email_log.txt');
-
 // ============================================
 // UPLOAD CONFIGURATION
 // ============================================
@@ -133,6 +129,9 @@ function getDBConnection() {
             
             // Create PDO instance
             $pdo = new PDO($dsn, DB_USER, DB_PASS, $options);
+            
+            // Set MySQL timezone to match PHP timezone
+            $pdo->exec("SET time_zone = '" . date('P') . "'");
             
         } catch (PDOException $e) {
             // Log error and display user-friendly message

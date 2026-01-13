@@ -1,0 +1,30 @@
+# Dependencies
+/vendor/
+composer.lock
+
+# Environment files
+.env
+
+# Uploads
+/uploads/movies/*
+/uploads/profiles/*
+!uploads/movies/.gitkeep
+!uploads/profiles/.gitkeep
+
+# Logs
+/logs/*.txt
+/logs/*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Config (if using environment variables)
+# config/config.php

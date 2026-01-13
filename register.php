@@ -110,7 +110,6 @@ include INCLUDES_PATH . 'header.php';
                         <div class="alert alert-success alert-dismissible fade show">
                             <i class="bi bi-check-circle me-2"></i>
                             <?php echo htmlspecialchars($success); ?>
-                            <br><small>Check the <code>logs/email_log.txt</code> file for the verification link (demo mode).</small>
                             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                         </div>
                     <?php endif; ?>

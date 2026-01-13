@@ -82,20 +82,18 @@ $userId = $_SESSION['user_id'];
 
 /**
  * STRIPE PAYMENT PROCESSING
- * In production, use the Stripe PHP SDK:
- * composer require stripe/stripe-php
- * 
- * For this demo, we'll simulate a successful payment
  */
 
 try {
-    // Simulate Stripe API call
-    // In production, you would do:
-    /*
+    // Load Stripe library
+    require_once ROOT_PATH . 'vendor/autoload.php';
+    
+    // Set Stripe API key
     \Stripe\Stripe::setApiKey(STRIPE_SECRET_KEY);
     
+    // Create the charge
     $charge = \Stripe\Charge::create([
-        'amount' => $totalAmount * 100, // Stripe uses cents
+        'amount' => round($totalAmount * 100), // Stripe uses cents
         'currency' => STRIPE_CURRENCY,
         'source' => $stripeToken,
         'description' => "CineMaster Booking - {$showtime['movie_title']}",
@@ -107,33 +105,20 @@ try {
     ]);
     
     $stripePaymentId = $charge->id;
-    $paymentStatus = 'completed';
-    */
+    $paymentStatus = ($charge->status === 'succeeded') ? 'completed' : 'pending';
     
-    // DEMO: Simulate successful payment
-    $stripePaymentId = 'ch_demo_' . bin2hex(random_bytes(12));
-    $paymentStatus = 'completed';
-    
-    // Log the Stripe API response (simulated)
-    $apiResponse = [
-        'id' => $stripePaymentId,
-        'amount' => $totalAmount * 100,
-        'currency' => STRIPE_CURRENCY,
-        'status' => 'succeeded',
-        'created' => time(),
-        'metadata' => [
-            'user_id' => $userId,
-            'showtime_id' => $showtimeId,
-            'seats' => implode(', ', $seats)
-        ]
-    ];
-    
-    // Log the API response to database
+    // Log the Stripe API response
     logAction(
         $userId, 
         'Stripe payment processed', 
         'api', 
-        json_encode($apiResponse)
+        json_encode([
+            'id' => $charge->id,
+            'amount' => $charge->amount,
+            'currency' => $charge->currency,
+            'status' => $charge->status,
+            'created' => $charge->created
+        ])
     );
     
     // Create the booking

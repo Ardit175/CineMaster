@@ -186,12 +186,6 @@ include INCLUDES_PATH . 'header.php';
                         <div class="mb-4">
                             <h6 class="text-light mb-3">Card Information</h6>
                             
-                            <!-- Demo Mode Notice -->
-                            <div class="alert alert-info mb-3">
-                                <i class="bi bi-info-circle me-2"></i>
-                                <strong>Test Mode:</strong> Use card number <code>4242 4242 4242 4242</code> with any future date and CVC.
-                            </div>
-                            
                             <div id="card-element" class="form-control bg-dark text-light border-secondary py-3">
                                 <!-- Stripe Card Element will be inserted here -->
                             </div>
@@ -283,11 +277,8 @@ form.addEventListener('submit', async function(e) {
     buttonText.classList.add('d-none');
     spinner.classList.remove('d-none');
     
-    // For demo purposes, we'll simulate a successful payment
-    // In production, you would create a PaymentIntent on the server first
-    
     try {
-        // Create token (for demo - in production use PaymentIntents)
+        // Create token from card details
         const { token, error } = await stripe.createToken(cardElement);
         
         if (error) {

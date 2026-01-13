@@ -1,0 +1,19 @@
+{
+    "name": "cinemaster/app",
+    "description": "CineMaster - Cinema Booking System",
+    "type": "project",
+    "require": {
+        "php": ">=8.0",
+        "phpmailer/phpmailer": "^7.0",
+        "stripe/stripe-php": "^19.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "CineMaster\\": "src/"
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true
+    }
+}

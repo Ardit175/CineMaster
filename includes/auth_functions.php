@@ -11,6 +11,10 @@
  * - Remember me functionality
  */
 
+// Import PHPMailer classes
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
 /**
  * ============================================
  * REGISTRATION FUNCTION
@@ -51,7 +55,7 @@ function registerUser($name, $email, $password) {
         
         $userId = $pdo->lastInsertId();
         
-        // Send verification email (simulated for demo)
+        // Send verification email
         sendVerificationEmail($email, $name, $token);
         
         // Log the registration
@@ -524,6 +528,7 @@ function initiatePasswordReset($email) {
     $token = bin2hex(random_bytes(32));
     $tokenExpire = date('Y-m-d H:i:s', strtotime('+1 hour'));
     
+    // Clear any existing token and set new reset token
     $stmt = $pdo->prepare("UPDATE users SET token = ?, token_expire = ? WHERE id = ?");
     $stmt->execute([$token, $tokenExpire, $user['id']]);
     
@@ -582,12 +587,12 @@ function resetPassword($token, $newPassword) {
 
 /**
  * ============================================
- * EMAIL FUNCTIONS (Simulated for Demo)
+ * EMAIL FUNCTIONS
  * ============================================
  */
 
 /**
- * Sends verification email (simulated)
+ * Sends verification email
  */
 function sendVerificationEmail($email, $name, $token) {
     $verifyLink = SITE_URL . "/verify.php?token=" . $token;
@@ -600,17 +605,11 @@ function sendVerificationEmail($email, $name, $token) {
     $body .= "This link will expire in 24 hours.\n\n";
     $body .= "Best regards,\nCineMaster Team";
     
-    if (EMAIL_SIMULATION) {
-        // Log email to file for demo
-        logEmail($email, $subject, $body);
-    } else {
-        // Use PHPMailer for real email sending
-        // sendRealEmail($email, $name, $subject, $body);
-    }
+    sendRealEmail($email, $name, $subject, $body);
 }
 
 /**
- * Sends password reset email (simulated)
+ * Sends password reset email
  */
 function sendPasswordResetEmail($email, $name, $token) {
     $resetLink = SITE_URL . "/reset_password.php?token=" . $token;
@@ -624,28 +623,56 @@ function sendPasswordResetEmail($email, $name, $token) {
     $body .= "If you didn't request this, please ignore this email.\n\n";
     $body .= "Best regards,\nCineMaster Team";
     
-    if (EMAIL_SIMULATION) {
-        logEmail($email, $subject, $body);
-    }
+    sendRealEmail($email, $name, $subject, $body);
 }
 
 /**
- * Logs email to file (for demo purposes)
+ * Sends real email using PHPMailer
+ * 
+ * @param string $to Recipient email
+ * @param string $recipientName Recipient name
+ * @param string $subject Email subject
+ * @param string $body Email body (plain text)
+ * @return bool Success status
  */
-function logEmail($to, $subject, $body) {
-    $logDir = dirname(EMAIL_LOG_FILE);
-    if (!is_dir($logDir)) {
-        mkdir($logDir, 0777, true);
+function sendRealEmail($to, $recipientName, $subject, $body) {
+    // Load Composer's autoloader if PHPMailer is installed
+    if (file_exists(ROOT_PATH . 'vendor/autoload.php')) {
+        require_once ROOT_PATH . 'vendor/autoload.php';
+    } else {
+        error_log('PHPMailer not installed. Run: composer require phpmailer/phpmailer');
+        return false;
     }
     
-    $log = "\n========================================\n";
-    $log .= "Date: " . date('Y-m-d H:i:s') . "\n";
-    $log .= "To: {$to}\n";
-    $log .= "Subject: {$subject}\n";
-    $log .= "Body:\n{$body}\n";
-    $log .= "========================================\n";
+    $mail = new PHPMailer(true);
     
-    file_put_contents(EMAIL_LOG_FILE, $log, FILE_APPEND);
+    try {
+        // Server settings
+        $mail->isSMTP();
+        $mail->Host       = MAIL_HOST;
+        $mail->SMTPAuth   = true;
+        $mail->Username   = MAIL_USERNAME;
+        $mail->Password   = MAIL_PASSWORD;
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port       = MAIL_PORT;
+        
+        // Recipients
+        $mail->setFrom(MAIL_USERNAME, MAIL_FROM_NAME);
+        $mail->addAddress($to, $recipientName);
+        $mail->addReplyTo(SITE_EMAIL, MAIL_FROM_NAME);
+        
+        // Content
+        $mail->isHTML(false);
+        $mail->Subject = $subject;
+        $mail->Body    = $body;
+        
+        $mail->send();
+        
+        return true;
+    } catch (Exception $e) {
+        error_log("Email Error: {$mail->ErrorInfo}");
+        return false;
+    }
 }
 
 /**

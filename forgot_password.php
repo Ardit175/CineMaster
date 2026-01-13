@@ -30,9 +30,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $errors[] = 'Please enter a valid email address.';
         } else {
             $result = initiatePasswordReset($email);
-            $success = $result['message'];
+            if ($result['success']) {
+                // Redirect to prevent form resubmission
+                $_SESSION['reset_message'] = $result['message'];
+                redirect(SITE_URL . '/forgot_password.php?sent=1');
+            } else {
+                $errors[] = $result['message'];
+            }
         }
     }
+}
+
+// Check for redirect message
+if (isset($_GET['sent']) && isset($_SESSION['reset_message'])) {
+    $success = $_SESSION['reset_message'];
+    unset($_SESSION['reset_message']);
 }
 
 $csrfToken = generateCSRFToken();
@@ -70,11 +82,10 @@ include INCLUDES_PATH . 'header.php';
                         <div class="alert alert-success">
                             <i class="bi bi-check-circle me-2"></i>
                             <?php echo htmlspecialchars($success); ?>
-                            <br><small>Check the <code>logs/email_log.txt</code> file for the reset link (demo mode).</small>
                         </div>
                     <?php else: ?>
                     
-                    <form method="POST" action="">
+                    <form method="POST" action="" id="forgotPasswordForm">
                         <input type="hidden" name="csrf_token" value="<?php echo $csrfToken; ?>">
                         
                         <div class="mb-4">
@@ -86,11 +97,19 @@ include INCLUDES_PATH . 'header.php';
                         </div>
                         
                         <div class="d-grid">
-                            <button type="submit" class="btn btn-warning btn-lg">
+                            <button type="submit" class="btn btn-warning btn-lg" id="submitBtn">
                                 <i class="bi bi-send me-2"></i>Send Reset Link
                             </button>
                         </div>
                     </form>
+                    
+                    <script>
+                    document.getElementById('forgotPasswordForm').addEventListener('submit', function(e) {
+                        const btn = document.getElementById('submitBtn');
+                        btn.disabled = true;
+                        btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Sending...';
+                    });
+                    </script>
                     
                     <?php endif; ?>
                     
