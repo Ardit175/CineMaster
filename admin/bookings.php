@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $bookingId = (int)$_POST['booking_id'];
             $newStatus = $_POST['status'];
             
-            $stmt = $pdo->prepare("UPDATE bookings SET status = ? WHERE id = ?");
+            $stmt = $pdo->prepare("UPDATE bookings SET payment_status = ? WHERE id = ?");
             if ($stmt->execute([$newStatus, $bookingId])) {
                 $success = 'Booking status updated.';
                 logAction($_SESSION['user_id'], "Updated booking #{$bookingId} status to {$newStatus}", 'admin');
@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 
                 if ($booking) {
                     // Update booking status
-                    $updateStmt = $pdo->prepare("UPDATE bookings SET status = 'cancelled' WHERE id = ?");
+                    $updateStmt = $pdo->prepare("UPDATE bookings SET payment_status = 'refunded' WHERE id = ?");
                     $updateStmt->execute([$bookingId]);
                     
                     // Delete associated seats
@@ -82,7 +82,8 @@ $filterSearch = $_GET['search'] ?? '';
 $query = "
     SELECT b.*, u.name as user_name, u.email as user_email,
            m.title as movie_title, t.name as theater_name,
-           s.show_date, s.show_time
+           s.start_time,
+           (SELECT COUNT(*) FROM seats WHERE booking_id = b.id) as seats_booked
     FROM bookings b
     JOIN users u ON b.user_id = u.id
     JOIN showtimes s ON b.showtime_id = s.id
@@ -93,11 +94,12 @@ $query = "
 $params = [];
 
 if ($filterStatus) {
-    $query .= " AND b.status = ?";
+    $query .= " AND b.payment_status = ?";
     $params[] = $filterStatus;
 }
 if ($filterDate) {
-    $query .= " AND DATE(b.created_at) = ?";
+    $query .= " AND DATE(b.booking_date) = ?";
+    $params[] = $filterDate;
     $params[] = $filterDate;
 }
 if ($filterSearch) {
@@ -106,7 +108,7 @@ if ($filterSearch) {
     $params = array_merge($params, [$search, $search, $search, $search]);
 }
 
-$query .= " ORDER BY b.created_at DESC";
+$query .= " ORDER BY b.booking_date DESC";
 
 $stmt = $pdo->prepare($query);
 $stmt->execute($params);
@@ -116,10 +118,10 @@ $bookings = $stmt->fetchAll();
 $statsStmt = $pdo->query("
     SELECT 
         COUNT(*) as total,
-        SUM(CASE WHEN status = 'confirmed' THEN 1 ELSE 0 END) as confirmed,
-        SUM(CASE WHEN status = 'pending' THEN 1 ELSE 0 END) as pending,
-        SUM(CASE WHEN status = 'cancelled' THEN 1 ELSE 0 END) as cancelled,
-        SUM(CASE WHEN status = 'confirmed' THEN total_amount ELSE 0 END) as total_revenue
+        SUM(CASE WHEN payment_status = 'completed' THEN 1 ELSE 0 END) as confirmed,
+        SUM(CASE WHEN payment_status = 'pending' THEN 1 ELSE 0 END) as pending,
+        SUM(CASE WHEN payment_status IN ('failed', 'refunded') THEN 1 ELSE 0 END) as cancelled,
+        SUM(CASE WHEN payment_status = 'completed' THEN total_amount ELSE 0 END) as total_revenue
     FROM bookings
 ");
 $stats = $statsStmt->fetch();
@@ -190,7 +192,7 @@ include INCLUDES_PATH . 'header.php';
                 <div class="col-md-3">
                     <div class="card bg-primary text-white">
                         <div class="card-body text-light">
-                            <h4><?php echo $stats['total']; ?></h4>
+                            <h4><?php echo $stats['total'] ?? 0; ?></h4>
                             <small>Total Bookings</small>
                         </div>
                     </div>
@@ -198,7 +200,7 @@ include INCLUDES_PATH . 'header.php';
                 <div class="col-md-3">
                     <div class="card bg-success text-white">
                         <div class="card-body text-light">
-                            <h4><?php echo $stats['confirmed']; ?></h4>
+                            <h4><?php echo $stats['confirmed'] ?? 0; ?></h4>
                             <small>Confirmed</small>
                         </div>
                     </div>
@@ -206,7 +208,7 @@ include INCLUDES_PATH . 'header.php';
                 <div class="col-md-3">
                     <div class="card bg-warning text-dark">
                         <div class="card-body text-light">
-                            <h4><?php echo $stats['pending']; ?></h4>
+                            <h4><?php echo $stats['pending'] ?? 0; ?></h4>
                             <small>Pending</small>
                         </div>
                     </div>
@@ -214,7 +216,7 @@ include INCLUDES_PATH . 'header.php';
                 <div class="col-md-3">
                     <div class="card bg-danger text-white">
                         <div class="card-body text-light">
-                            <h4>$<?php echo number_format($stats['total_revenue'], 2); ?></h4>
+                            <h4>$<?php echo number_format($stats['total_revenue'] ?? 0, 2); ?></h4>
                             <small>Total Revenue</small>
                         </div>
                     </div>
@@ -236,9 +238,10 @@ include INCLUDES_PATH . 'header.php';
                             <label class="form-label text-light">Status</label>
                             <select name="status" class="form-select bg-dark text-light border-secondary">
                                 <option value="">All Statuses</option>
-                                <option value="confirmed" <?php echo $filterStatus === 'confirmed' ? 'selected' : ''; ?>>Confirmed</option>
+                                <option value="completed" <?php echo $filterStatus === 'completed' ? 'selected' : ''; ?>>Completed</option>
                                 <option value="pending" <?php echo $filterStatus === 'pending' ? 'selected' : ''; ?>>Pending</option>
-                                <option value="cancelled" <?php echo $filterStatus === 'cancelled' ? 'selected' : ''; ?>>Cancelled</option>
+                                <option value="failed" <?php echo $filterStatus === 'failed' ? 'selected' : ''; ?>>Failed</option>
+                                <option value="refunded" <?php echo $filterStatus === 'refunded' ? 'selected' : ''; ?>>Refunded</option>
                             </select>
                         </div>
                         <div class="col-md-3">
@@ -285,8 +288,8 @@ include INCLUDES_PATH . 'header.php';
                                     <?php foreach ($bookings as $booking): ?>
                                         <tr>
                                             <td>
-                                                <strong class="text-danger"><?php echo $booking['booking_number']; ?></strong>
-                                                <br><small class="text-light"><?php echo formatDate($booking['created_at'], 'M j, g:i A'); ?></small>
+                                                <strong class="text-danger"><?php echo $booking['booking_reference']; ?></strong>
+                                                <br><small class="text-light"><?php echo formatDate($booking['booking_date'], 'M j, g:i A'); ?></small>
                                             </td>
                                             <td>
                                                 <?php echo htmlspecialchars($booking['user_name']); ?>
@@ -297,10 +300,10 @@ include INCLUDES_PATH . 'header.php';
                                                 <br><small class="text-light"><?php echo htmlspecialchars($booking['theater_name']); ?></small>
                                             </td>
                                             <td>
-                                                <?php echo formatDate($booking['show_date']); ?>
-                                                <br><small><?php echo date('g:i A', strtotime($booking['show_time'])); ?></small>
+                                                <?php echo formatDate(date('Y-m-d', strtotime($booking['start_time']))); ?>
+                                                <br><small><?php echo date('g:i A', strtotime($booking['start_time'])); ?></small>
                                             </td>
-                                            <td><?php echo $booking['seats_booked']; ?></td>
+                                            <td><?php echo $booking['seats_booked'] ?? 0; ?></td>
                                             <td><strong>$<?php echo number_format($booking['total_amount'], 2); ?></strong></td>
                                             <td>
                                                 <form method="POST" class="d-inline">
@@ -309,9 +312,10 @@ include INCLUDES_PATH . 'header.php';
                                                     <input type="hidden" name="booking_id" value="<?php echo $booking['id']; ?>">
                                                     <select name="status" class="form-select form-select-sm bg-dark text-light border-secondary"
                                                             onchange="this.form.submit()" style="width: 110px;">
-                                                        <option value="confirmed" <?php echo $booking['status'] === 'confirmed' ? 'selected' : ''; ?>>Confirmed</option>
-                                                        <option value="pending" <?php echo $booking['status'] === 'pending' ? 'selected' : ''; ?>>Pending</option>
-                                                        <option value="cancelled" <?php echo $booking['status'] === 'cancelled' ? 'selected' : ''; ?>>Cancelled</option>
+                                                        <option value="completed" <?php echo $booking['payment_status'] === 'completed' ? 'selected' : ''; ?>>Completed</option>
+                                                        <option value="pending" <?php echo $booking['payment_status'] === 'pending' ? 'selected' : ''; ?>>Pending</option>
+                                                        <option value="failed" <?php echo $booking['payment_status'] === 'failed' ? 'selected' : ''; ?>>Failed</option>
+                                                        <option value="refunded" <?php echo $booking['payment_status'] === 'refunded' ? 'selected' : ''; ?>>Refunded</option>
                                                     </select>
                                                 </form>
                                             </td>
@@ -324,7 +328,7 @@ include INCLUDES_PATH . 'header.php';
                                                     <i class="bi bi-eye"></i>
                                                 </button>
                                                 
-                                                <?php if ($booking['status'] !== 'cancelled'): ?>
+                                                <?php if ($booking['payment_status'] !== 'refunded'): ?>
                                                     <form method="POST" class="d-inline" 
                                                           onsubmit="return confirm('Cancel this booking?');">
                                                         <input type="hidden" name="csrf_token" value="<?php echo $csrfToken; ?>">
@@ -345,7 +349,7 @@ include INCLUDES_PATH . 'header.php';
                                                     <div class="modal-header border-secondary">
                                                         <h5 class="modal-title">
                                                             <i class="bi bi-ticket-perforated text-danger me-2"></i>
-                                                            Booking #<?php echo $booking['booking_number']; ?>
+                                                            Booking #<?php echo $booking['booking_reference']; ?>
                                                         </h5>
                                                         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                                                     </div>
@@ -369,11 +373,11 @@ include INCLUDES_PATH . 'header.php';
                                                             </div>
                                                             <div class="col-6">
                                                                 <small class="text-light">Show Date</small>
-                                                                <p class="mb-0"><?php echo formatDate($booking['show_date']); ?></p>
+                                                                <p class="mb-0"><?php echo formatDate(date('Y-m-d', strtotime($booking['start_time']))); ?></p>
                                                             </div>
                                                             <div class="col-6">
                                                                 <small class="text-light">Show Time</small>
-                                                                <p class="mb-0"><?php echo date('g:i A', strtotime($booking['show_time'])); ?></p>
+                                                                <p class="mb-0"><?php echo date('g:i A', strtotime($booking['start_time'])); ?></p>
                                                             </div>
                                                             <div class="col-6">
                                                                 <small class="text-light">Seats</small>
@@ -388,19 +392,20 @@ include INCLUDES_PATH . 'header.php';
                                                                 <p class="mb-0">
                                                                     <?php
                                                                     $statusClass = [
-                                                                        'confirmed' => 'success',
+                                                                        'completed' => 'success',
                                                                         'pending' => 'warning',
-                                                                        'cancelled' => 'danger'
+                                                                        'failed' => 'danger',
+                                                                        'refunded' => 'secondary'
                                                                     ];
                                                                     ?>
-                                                                    <span class="badge bg-<?php echo $statusClass[$booking['status']]; ?>">
-                                                                        <?php echo ucfirst($booking['status']); ?>
+                                                                    <span class="badge bg-<?php echo $statusClass[$booking['payment_status']] ?? 'secondary'; ?>">
+                                                                        <?php echo ucfirst($booking['payment_status']); ?>
                                                                     </span>
                                                                 </p>
                                                             </div>
                                                             <div class="col-6">
                                                                 <small class="text-light">Booked On</small>
-                                                                <p class="mb-0"><?php echo formatDate($booking['created_at'], 'M j, Y g:i A'); ?></p>
+                                                                <p class="mb-0"><?php echo formatDate($booking['booking_date'], 'M j, Y g:i A'); ?></p>
                                                             </div>
                                                         </div>
                                                     </div>

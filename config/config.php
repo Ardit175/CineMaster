@@ -77,8 +77,8 @@ define('CSRF_TOKEN_NAME', 'csrf_token');
 // STRIPE CONFIGURATION (TEST MODE)
 // ============================================
 // Get your test keys from: https://dashboard.stripe.com/test/apikeys
-define('STRIPE_PUBLIC_KEY', 'pk_test_your_public_key_here');
-define('STRIPE_SECRET_KEY', 'sk_test_your_secret_key_here');
+define('STRIPE_PUBLIC_KEY', 'pk_test_51Sp4rVBIPoLS33Blnu4egneD7wN9F3Jtpvd17sBFKcqBAbxfTeCvEYEDC7bkONYx4D7e5v1cWeNACsDCgBvjneCY00S8pR1LWw');
+define('STRIPE_SECRET_KEY', 'sk_test_51Sp4rVBIPoLS33BlEG8rGCZNw8sWjZ3SBOXgqA1NNlQx8vZu5gaRIJ2H8AGwpSjP9gstUA01zYKwqwLgG6M0F3E800T4LWAxzQ');
 define('STRIPE_CURRENCY', 'usd');
 
 // ============================================
@@ -86,8 +86,8 @@ define('STRIPE_CURRENCY', 'usd');
 // ============================================
 define('MAIL_HOST', 'smtp.gmail.com');   // SMTP server
 define('MAIL_PORT', 587);                // SMTP port (587 for TLS)
-define('MAIL_USERNAME', 'your-email@gmail.com');
-define('MAIL_PASSWORD', 'your-app-password');
+define('MAIL_USERNAME', 'arditpalushi123@gmail.com');
+define('MAIL_PASSWORD', 'zjwz fwbw lsbe amuh'); // Use App Password if 2FA is enabled
 define('MAIL_FROM_NAME', 'CineMaster');
 
 // ============================================

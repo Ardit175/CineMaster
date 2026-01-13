@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['clear_logs'])) {
     } else {
         $olderThan = $_POST['older_than'] ?? '30';
         
-        $stmt = $pdo->prepare("DELETE FROM logs WHERE created_at < DATE_SUB(NOW(), INTERVAL ? DAY)");
+        $stmt = $pdo->prepare("DELETE FROM logs WHERE timestamp < DATE_SUB(NOW(), INTERVAL ? DAY)");
         if ($stmt->execute([$olderThan])) {
             $deleted = $stmt->rowCount();
             logAction($_SESSION['user_id'], "Cleared {$deleted} logs older than {$olderThan} days", 'admin');
@@ -45,7 +45,7 @@ $query = "
 $params = [];
 
 if ($filterCategory) {
-    $query .= " AND l.category = ?";
+    $query .= " AND l.action_type = ?";
     $params[] = $filterCategory;
 }
 if ($filterUser) {
@@ -53,7 +53,7 @@ if ($filterUser) {
     $params[] = $filterUser;
 }
 if ($filterDate) {
-    $query .= " AND DATE(l.created_at) = ?";
+    $query .= " AND DATE(l.timestamp) = ?";
     $params[] = $filterDate;
 }
 if ($filterSearch) {
@@ -62,7 +62,7 @@ if ($filterSearch) {
     $params = array_merge($params, [$search, $search]);
 }
 
-$query .= " ORDER BY l.created_at DESC LIMIT 500";
+$query .= " ORDER BY l.timestamp DESC LIMIT 500";
 
 $stmt = $pdo->prepare($query);
 $stmt->execute($params);
@@ -74,14 +74,14 @@ $statsStmt = $pdo->query("
         COUNT(*) as total,
         COUNT(DISTINCT user_id) as unique_users,
         COUNT(DISTINCT ip_address) as unique_ips,
-        COUNT(DISTINCT category) as categories
+        COUNT(DISTINCT action_type) as action_types
     FROM logs
-    WHERE created_at >= DATE_SUB(NOW(), INTERVAL 7 DAY)
+    WHERE timestamp >= DATE_SUB(NOW(), INTERVAL 7 DAY)
 ");
 $stats = $statsStmt->fetch();
 
 // Get categories for filter
-$categories = $pdo->query("SELECT DISTINCT category FROM logs ORDER BY category")->fetchAll(PDO::FETCH_COLUMN);
+$categories = $pdo->query("SELECT DISTINCT action_type FROM logs ORDER BY action_type")->fetchAll(PDO::FETCH_COLUMN);
 
 // Get users for filter
 $users = $pdo->query("SELECT id, name, email FROM users ORDER BY name")->fetchAll();
@@ -169,8 +169,8 @@ include INCLUDES_PATH . 'header.php';
                 <div class="col-md-3">
                     <div class="card bg-dark border-secondary">
                         <div class="card-body text-light text-center">
-                            <h4 class="text-success"><?php echo $stats['categories']; ?></h4>
-                            <small class="text-light">Categories</small>
+                            <h4 class="text-success"><?php echo $stats['action_types']; ?></h4>
+                            <small class="text-light">Action Types</small>
                         </div>
                     </div>
                 </div>
@@ -255,7 +255,7 @@ include INCLUDES_PATH . 'header.php';
                                     <?php foreach ($logs as $log): ?>
                                         <tr>
                                             <td>
-                                                <small><?php echo formatDate($log['created_at'], 'M j, g:i:s A'); ?></small>
+                                                <small><?php echo formatDate($log['timestamp'], 'M j, g:i:s A'); ?></small>
                                             </td>
                                             <td>
                                                 <?php if ($log['user_name']): ?>
@@ -270,13 +270,14 @@ include INCLUDES_PATH . 'header.php';
                                                         'auth' => 'success',
                                                         'booking' => 'primary',
                                                         'admin' => 'danger',
-                                                        'system' => 'warning',
-                                                        'payment' => 'info'
+                                                        'error' => 'warning',
+                                                        'payment' => 'info',
+                                                        'api' => 'secondary'
                                                     ];
-                                                    $color = $categoryColors[$log['category']] ?? 'secondary';
+                                                    $color = $categoryColors[$log['action_type']] ?? 'secondary';
                                                 ?>
                                                 <span class="badge bg-<?php echo $color; ?>">
-                                                    <?php echo ucfirst($log['category']); ?>
+                                                    <?php echo ucfirst($log['action_type']); ?>
                                                 </span>
                                             </td>
                                             <td><?php echo htmlspecialchars($log['action']); ?></td>

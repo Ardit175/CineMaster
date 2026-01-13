@@ -38,14 +38,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (empty($showTime)) $errors[] = 'Show time is required.';
             if ($price <= 0) $errors[] = 'Valid price is required.';
             
+            // Combine date and time into start_time
+            $startTime = $showDate . ' ' . $showTime . ':00';
+            
             // Check for scheduling conflicts
             if (empty($errors)) {
                 $conflictStmt = $pdo->prepare("
                     SELECT s.*, m.duration 
                     FROM showtimes s
                     JOIN movies m ON s.movie_id = m.id
-                    WHERE s.theater_id = ? AND s.show_date = ?
-                    ORDER BY s.show_time
+                    WHERE s.theater_id = ? AND DATE(s.start_time) = ?
+                    ORDER BY s.start_time
                 ");
                 $conflictStmt->execute([$theaterId, $showDate]);
                 $existingShows = $conflictStmt->fetchAll();
@@ -55,11 +58,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $movieStmt->execute([$movieId]);
                 $newDuration = $movieStmt->fetchColumn();
                 
-                $newStart = strtotime($showTime);
+                $newStart = strtotime($startTime);
                 $newEnd = $newStart + ($newDuration * 60) + (20 * 60); // Add 20 min buffer
                 
                 foreach ($existingShows as $existing) {
-                    $existStart = strtotime($existing['show_time']);
+                    $existStart = strtotime($existing['start_time']);
                     $existEnd = $existStart + ($existing['duration'] * 60) + (20 * 60);
                     
                     if (($newStart >= $existStart && $newStart < $existEnd) || 
@@ -72,11 +75,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
             if (empty($errors)) {
                 $stmt = $pdo->prepare("
-                    INSERT INTO showtimes (movie_id, theater_id, show_date, show_time, price)
-                    VALUES (?, ?, ?, ?, ?)
+                    INSERT INTO showtimes (movie_id, theater_id, start_time, price)
+                    VALUES (?, ?, ?, ?)
                 ");
                 
-                if ($stmt->execute([$movieId, $theaterId, $showDate, $showTime, $price])) {
+                if ($stmt->execute([$movieId, $theaterId, $startTime, $price])) {
                     $success = 'Showtime added successfully!';
                     logAction($_SESSION['user_id'], "Added showtime for movie ID: {$movieId}", 'admin');
                 } else {
@@ -127,7 +130,7 @@ $filterTheater = $_GET['theater'] ?? '';
 
 // Build query with filters
 $query = "
-    SELECT s.*, m.title as movie_title, m.duration, t.name as theater_name, t.seats_per_row, t.total_rows,
+    SELECT s.*, m.title as movie_title, m.duration, t.name as theater_name, t.seats_per_row, t.rows_count, t.total_seats,
            (SELECT COUNT(*) FROM bookings WHERE showtime_id = s.id) as booking_count
     FROM showtimes s
     JOIN movies m ON s.movie_id = m.id
@@ -137,7 +140,7 @@ $query = "
 $params = [];
 
 if ($filterDate) {
-    $query .= " AND s.show_date = ?";
+    $query .= " AND DATE(s.start_time) = ?";
     $params[] = $filterDate;
 }
 if ($filterMovie) {
@@ -149,7 +152,7 @@ if ($filterTheater) {
     $params[] = $filterTheater;
 }
 
-$query .= " ORDER BY s.show_date DESC, s.show_time ASC";
+$query .= " ORDER BY s.start_time DESC";
 
 $stmt = $pdo->prepare($query);
 $stmt->execute($params);
@@ -262,7 +265,7 @@ include INCLUDES_PATH . 'header.php';
                                     <?php foreach ($theaters as $theater): ?>
                                         <option value="<?php echo $theater['id']; ?>">
                                             <?php echo htmlspecialchars($theater['name']); ?> 
-                                            (<?php echo $theater['total_rows'] * $theater['seats_per_row']; ?> seats)
+                                            (<?php echo $theater['rows_count'] * $theater['seats_per_row']; ?> seats)
                                         </option>
                                     <?php endforeach; ?>
                                 </select>
@@ -371,8 +374,8 @@ include INCLUDES_PATH . 'header.php';
                                 <?php else: ?>
                                     <?php foreach ($showtimes as $show): ?>
                                         <?php 
-                                            $totalSeats = $show['seats_per_row'] * $show['total_rows'];
-                                            $isPast = strtotime($show['show_date']) < strtotime(date('Y-m-d'));
+                                            $totalSeats = $show['seats_per_row'] * $show['rows_count'];
+                                            $isPast = strtotime(date('Y-m-d', strtotime($show['start_time']))) < strtotime(date('Y-m-d'));
                                         ?>
                                         <tr class="<?php echo $isPast ? 'text-light' : ''; ?>">
                                             <td>
@@ -380,8 +383,8 @@ include INCLUDES_PATH . 'header.php';
                                                 <br><small class="text-light"><?php echo $show['duration']; ?> min</small>
                                             </td>
                                             <td><?php echo htmlspecialchars($show['theater_name']); ?></td>
-                                            <td><?php echo formatDate($show['show_date']); ?></td>
-                                            <td><?php echo date('g:i A', strtotime($show['show_time'])); ?></td>
+                                        <td><?php echo formatDate(date('Y-m-d', strtotime($show['start_time']))); ?></td>
+                                        <td><?php echo date('g:i A', strtotime($show['start_time'])); ?></td>
                                             <td>
                                                 <form method="POST" class="d-inline">
                                                     <input type="hidden" name="csrf_token" value="<?php echo $csrfToken; ?>">
